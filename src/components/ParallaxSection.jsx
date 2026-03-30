@@ -155,7 +155,7 @@ useEffect(() => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-7xl font-bold mb-4 tracking-wide
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-wide
                      bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400
                      bg-clip-text text-transparent"
           style={{
