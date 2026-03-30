@@ -175,7 +175,7 @@ const [isTyping, setIsTyping] = useState(false)
 
   return (
     <motion.div
-      className="text-white"
+  className="text-white px-6 md:px-12 max-w-7xl mx-auto"
       style={{
         transform: `translate(${mouse.x}px, ${mouse.y}px)`
       }}
@@ -191,7 +191,8 @@ const [isTyping, setIsTyping] = useState(false)
       </motion.div>
 
       {/* HEADING */}
-      <motion.h1 className="text-5xl md:text-6xl font-bold leading-tight">
+      {/* <motion.h1 className="text-5xl md:text-6xl font-bold leading-tight"> */}
+      <motion.h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight break-words">
         Build the{" "}
         <span className="text-blue-400 relative">
           {text}
@@ -212,7 +213,8 @@ const [isTyping, setIsTyping] = useState(false)
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="mt-4 opacity-80 max-w-lg"
+        // className="mt-4 opacity-80 max-w-lg"
+        className="mt-4 opacity-80 max-w-md sm:max-w-lg"
       >
         We craft intelligent systems and immersive AI-driven experiences
         that redefine how technology interacts with humans.
@@ -238,7 +240,8 @@ const [isTyping, setIsTyping] = useState(false)
     boxShadow: "0px 0px 25px #3b82f6"
   }}
   transition={{ delay: 0.8 }}
-  className="mt-8 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition"
+  // className="mt-8 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition"
+  className="mt-6 px-5 py-3 text-sm sm:text-base bg-blue-500 hover:bg-blue-600 rounded-lg transition w-full sm:w-auto"
 >
   Explore the Future →
 </motion.button>

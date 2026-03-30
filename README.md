@@ -28,7 +28,7 @@ Built using React, Vite, Tailwind CSS, and Framer Motion.
 
 ##  Live Demo
 
-> Coming soon...
+[Kunjungi TechCorp](https://tech-corp-alpha.vercel.app/)
 
 ---
 

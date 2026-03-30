@@ -56,6 +56,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState("Home")
   const [loading, setLoading] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
 
   // LOADING (PUNYA KAMU, TETAP)
   useEffect(() => {
@@ -124,10 +125,10 @@ useEffect(() => {
             <motion.nav
               initial={{ y: -80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className={`fixed w-full z-50 px-6 md:px-16 transition-all duration-500 ${
+              className={`fixed top-0 left-0 w-full z-50 px-4 md:px-16 transition-all duration-500 ${
                 scrolled
                   ? "bg-black/60 backdrop-blur-xl py-2 border-b border-white/10 shadow-lg"
-                  : "bg-transparent py-4"
+                  : "bg-transparent py-3"
               }`}
             >
               <div className="flex justify-between items-center max-w-7xl mx-auto">
@@ -140,6 +141,14 @@ useEffect(() => {
                 >
                   TechCorp
                 </motion.h1>
+
+                {/* HAMBURGER */}
+              <div
+                className="md:hidden text-white text-2xl cursor-pointer"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {isOpen ? "✕" : "☰"}
+              </div>
 
                 {/* MENU */}
                 <div className="hidden md:flex items-center space-x-8">
@@ -227,6 +236,54 @@ useEffect(() => {
 
                 </div>
               </div>
+              {isOpen && (
+  <div className="md:hidden absolute left-4 right-4 top-full mt-2 bg-black/90 backdrop-blur-xl rounded-2xl p-5 space-y-4 border border-white/10">
+
+    {navLinks.map((item) => (
+      <a
+        key={item}
+        href={`#${item.toLowerCase()}`}
+        onClick={(e) => {
+          e.preventDefault()
+          setIsOpen(false)
+          setActive(item)
+
+          const section = document.getElementById(item.toLowerCase())
+          if (section) {
+            section.scrollIntoView({ behavior: "smooth" })
+          }
+        }}
+        className="block text-white border-b border-white/10 pb-2 hover:text-blue-400"
+      >
+        {item}
+      </a>
+    ))}
+
+    {/* LOGIN / BUTTON */}
+    <button
+      onClick={() => {
+        setIsOpen(false)
+        navigate(user ? "/create" : "/login")
+      }}
+      className="w-full bg-blue-500 py-2 rounded"
+    >
+      {user ? "Create Blog" : "Login"}
+    </button>
+
+    {user && (
+      <button
+        onClick={async () => {
+          await signOut(auth)
+          navigate("/")
+        }}
+        className="w-full text-red-400"
+      >
+        Logout
+      </button>
+    )}
+
+  </div>
+)}
             </motion.nav>
 
             {/* HERO */}
