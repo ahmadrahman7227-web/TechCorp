@@ -124,7 +124,7 @@ useEffect(() => {
     <motion.div
       className="pointer-events-none absolute inset-0"
       style={{
-        background: "radial-gradient(`circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18), transparent 40%`)"
+        background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18), transparent 40%)`
       }}
     />
 
