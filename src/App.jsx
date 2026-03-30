@@ -57,19 +57,19 @@ export default function App() {
   const [active, setActive] = useState("Home")
   const [loading, setLoading] = useState(true)
   const [isOpen, setIsOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  
 
   // RESPONSIVE
-  useEffect(() => {
-  const checkScreen = () => {
-    setIsMobile(window.innerWidth < 768)
-  }
+//   useEffect(() => {
+//   const checkScreen = () => {
+//     setIsMobile(window.innerWidth < 768)
+//   }
 
-  checkScreen()
-  window.addEventListener("resize", checkScreen)
+//   checkScreen()
+//   window.addEventListener("resize", checkScreen)
 
-  return () => window.removeEventListener("resize", checkScreen)
-}, [])
+//   return () => window.removeEventListener("resize", checkScreen)
+// }, [])
 
   // LOADING (PUNYA KAMU, TETAP)
   useEffect(() => {
@@ -133,24 +133,24 @@ useEffect(() => {
             {/* LOADING */}
             {loading && <LoadingScreen />}
             
-            {!isMobile && <ParticlesBg />}
-            {/* <ParticlesBg /> */}
+            {/* {!isMobile && <ParticlesBg />} */}
+            <ParticlesBg />
             {/* <CustomCursor /> */}
 
             {/* BACKGROUND */}
             <div className="fixed inset-0 -z-10 pointer-events-none">
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-black via-blue-950 to-black animate-gradient"></div>
 
-              {/* <div className="absolute w-[500px] h-[500px] pointer-events-none bg-blue-500/20 blur-3xl rounded-full top-[-100px] left-[-100px] animate-aurora"></div>
+              <div className="absolute w-[500px] h-[500px] pointer-events-none bg-blue-500/20 blur-3xl rounded-full top-[-100px] left-[-100px] animate-aurora"></div>
 
-              <div className="absolute w-[400px] h-[400px] pointer-events-none bg-purple-500/20 blur-3xl rounded-full bottom-[-100px] right-[-100px] animate-aurora2"></div> */}
-              {!isMobile && (
+              <div className="absolute w-[400px] h-[400px] pointer-events-none bg-purple-500/20 blur-3xl rounded-full bottom-[-100px] right-[-100px] animate-aurora2"></div>
+              {/* {!isMobile && (
             <>
               <div className="absolute w-[500px] h-[500px] bg-blue-500/20 blur-3xl rounded-full top-[-100px] left-[-100px] animate-aurora"></div>
 
               <div className="absolute w-[400px] h-[400px] bg-purple-500/20 blur-3xl rounded-full bottom-[-100px] right-[-100px] animate-aurora2"></div>
             </>
-          )}
+          )} */}
             </div>
 
             {/* NAVBAR */}
@@ -330,11 +330,11 @@ useEffect(() => {
                 {/* <div className="relative w-full h-[400px] flex items-center justify-center"> */}
                 <div className="relative w-full h-[250px] sm:h-[300px] md:h-[400px] flex items-center justify-center">
                   
-                  {/* <Hero3D /> */}
+                  <Hero3D />
 
-                  {!isMobile ? <Hero3D /> : (
+                  {/* {!isMobile ? <Hero3D /> : (
                 <div className="w-full h-full bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl" />
-              )}
+              )} */}
 
                   {/* <div className="absolute w-[300px] h-[300px] border border-blue-400/20 rounded-full animate-[spin_10s_linear_infinite]"></div> */}
                   <div className="absolute w-[200px] sm:w-[250px] md:w-[300px] h-[200px] sm:h-[250px] md:h-[300px] border border-blue-400/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
