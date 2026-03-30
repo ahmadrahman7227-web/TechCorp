@@ -71,10 +71,21 @@ export default function App() {
 
   // SCROLL NAVBAR
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 50)
+
+    // 🔥 AUTO CLOSE MOBILE MENU
+    if (isOpen) setIsOpen(false)
+  }
+
+  window.addEventListener("scroll", handleScroll)
+  return () => window.removeEventListener("scroll", handleScroll)
+}, [isOpen])
+  // useEffect(() => {
+  //   const handleScroll = () => setScrolled(window.scrollY > 50)
+  //   window.addEventListener("scroll", handleScroll)
+  //   return () => window.removeEventListener("scroll", handleScroll)
+  // }, [])
 
   const navLinks = ["Home", "About", "Services", "Teams", "Blog"]
   console.log("APP USER:", user)
@@ -286,23 +297,34 @@ useEffect(() => {
 )}
             </motion.nav>
 
+
+            <div className="pt-20 overflow-x-hidden">
             {/* HERO */}
-            <section id="home" className="h-screen flex items-center px-6 md:px-16">
-              <div className="grid md:grid-cols-2 gap-10 items-center w-full max-w-6xl mx-auto">
+          
+            <section  id="home" className="min-h-[100svh] flex items-center px-6 md:px-16 max-w-7xl mx-auto pb-16 pt-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center w-full">
+              
                 <HeroText />
 
-                <div className="relative w-full h-[400px] flex items-center justify-center">
+                {/* <div className="relative w-full h-[400px] flex items-center justify-center"> */}
+                <div className="relative w-full h-[250px] sm:h-[300px] md:h-[400px] flex items-center justify-center">
                   <Hero3D />
 
-                  <div className="absolute w-[300px] h-[300px] border border-blue-400/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                  {/* <div className="absolute w-[300px] h-[300px] border border-blue-400/20 rounded-full animate-[spin_10s_linear_infinite]"></div> */}
+                  <div className="absolute w-[200px] sm:w-[250px] md:w-[300px] h-[200px] sm:h-[250px] md:h-[300px] border border-blue-400/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
 
-                  <div className="absolute w-[200px] h-[200px] bg-blue-500/20 blur-3xl rounded-full animate-pulse"></div>
+                  {/* <div className="absolute w-[200px] h-[200px] bg-blue-500/20 blur-3xl rounded-full animate-pulse"></div> */}
+                  <div className="absolute w-[150px] sm:w-[200px] md:w-[200px] h-[150px] sm:h-[200px] md:h-[200px] bg-blue-500/20 blur-3xl rounded-full animate-pulse"></div>
                 </div>
               </div>
             </section>
 
-            <ParallaxSection />
-            <AboutSection />
+            
+            
+              <ParallaxSection />
+              <AboutSection />
+            </div>
+            
 
             {/* TESTIMONIAL SLIDER */}
 <section className="py-24 px-6 relative bg-black overflow-hidden">
@@ -313,7 +335,7 @@ useEffect(() => {
     What Our Clients Say
   </h2>
 
-  <div className="max-w-4xl mx-auto text-center relative h-[300px] flex items-center justify-center">
+  <div className="max-w-4xl mx-auto text-center relative min-h-[300px] px-4 flex items-center justify-center">
     {[
       {
         name: "John Carter",
@@ -348,10 +370,15 @@ useEffect(() => {
       >
 
         {/* AVATAR */}
-        <img
+        <img 
+          src={t.img} 
+          loading="lazy"
+          className="w-20 h-20 rounded-full mb-4 border-2 border-blue-400" 
+        />
+        {/* <img
           src={t.img}
           className="w-20 h-20 rounded-full mb-4 border-2 border-blue-400"
-        />
+        /> */}
 
         {/* TEXT */}
         <p className="text-gray-300 mb-4 text-lg max-w-xl">
@@ -377,7 +404,7 @@ useEffect(() => {
 
            
             {/* SERVICES */}
-<section id="services" className="py-24 px-6 relative">
+<section id="services" className="py-24 px-6 md:px-12 relative">
 
   <div className="absolute inset-0 pointer-events-none">
     <div className="w-[400px] h-[400px] bg-blue-500/10 blur-3xl rounded-full absolute top-0 left-0"></div>
@@ -453,7 +480,7 @@ useEffect(() => {
             <p className="text-blue-400 text-sm mb-2">{s.price}</p>
             <p className="text-gray-400 text-sm mb-4">{s.desc}</p>
 
-            {/* 🔥 FIXED BUTTON */}
+            {/*  FIXED BUTTON */}
             <button
               onClick={() => navigate(s.link)}
               className="text-blue-400 text-sm hover:underline"
@@ -468,7 +495,7 @@ useEffect(() => {
     ))}
   </div>
 
-  {/* 🔥 FIXED GLOBAL CTA */}
+  {/*  FIXED GLOBAL CTA */}
   <div className="text-center mt-16 relative z-10">
     <button
       onClick={() => navigate("/services")}

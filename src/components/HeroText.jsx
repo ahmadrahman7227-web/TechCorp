@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
+import { useRef } from "react"
 // import { useNavigate } from "react-router-dom"
 
 const words = ["Future", "AI", "Innovation", "Tech"] 
@@ -14,7 +15,15 @@ export default function HeroText() {
   const [subIndex, setSubIndex] = useState(0)
   const [deleting, setDeleting] = useState(false)
   const [phase, setPhase] = useState("intro") 
+  const chatRef = useRef(null)
 // "intro" | "choice" | "chat"
+const isMobile = window.innerWidth < 768
+
+  useEffect(() => {
+  if (chatRef.current) {
+    chatRef.current.scrollTop = chatRef.current.scrollHeight
+  }
+}, [messages, isTyping])
 
   //  MOUSE EFFECT
   useEffect(() => {
@@ -177,8 +186,8 @@ const [isTyping, setIsTyping] = useState(false)
     <motion.div
   className="text-white px-6 md:px-12 max-w-7xl mx-auto"
       style={{
-        transform: `translate(${mouse.x}px, ${mouse.y}px)`
-      }}
+  transform: isMobile ? "none" : `translate(${mouse.x}px, ${mouse.y}px)`
+}}
     >
 
       {/* BADGE */}
@@ -199,7 +208,7 @@ const [isTyping, setIsTyping] = useState(false)
           <span className="animate-pulse">|</span>
 
           <motion.span
-            className="absolute inset-0 blur-xl opacity-50 text-blue-400"
+            className="absolute inset-0 blur-md opacity-30 text-blue-400"
             animate={{ opacity: [0.2, 0.8, 0.2] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
@@ -240,8 +249,10 @@ const [isTyping, setIsTyping] = useState(false)
     boxShadow: "0px 0px 25px #3b82f6"
   }}
   transition={{ delay: 0.8 }}
-  // className="mt-8 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition"
-  className="mt-6 px-5 py-3 text-sm sm:text-base bg-blue-500 hover:bg-blue-600 rounded-lg transition w-full sm:w-auto"
+  className="mt-6 px-5 py-3 text-sm sm:text-base rounded-lg transition w-full sm:w-auto
+  bg-gradient-to-r from-blue-500 to-purple-500 
+  hover:scale-105 
+  shadow-[0_0_25px_rgba(59,130,246,0.5)]"
 >
   Explore the Future →
 </motion.button>
@@ -255,13 +266,15 @@ const [isTyping, setIsTyping] = useState(false)
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
-    className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50"
+    // className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50"
+    className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center z-50"
   >
     <motion.div
       initial={{ y: 100, scale: 0.8 }}
       animate={{ y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 100 }}
-      className="relative bg-black/40 border border-blue-500/30 rounded-2xl p-6 max-w-md w-full text-white shadow-[0_0_80px_rgba(59,130,246,0.6)] overflow-hidden"
+    //   className="relative bg-black/40 border border-blue-500/30 rounded-2xl p-6 max-w-md w-full text-white shadow-[0_0_80px_rgba(59,130,246,0.6)] overflow-hidden"
+    className="relative bg-black/40 border border-blue-500/30 rounded-t-2xl sm:rounded-2xl p-4 sm:p-6 w-full h-[90vh] sm:h-auto max-w-md text-white shadow-[0_0_80px_rgba(59,130,246,0.6)] flex flex-col"
     >
 
       {/* GLOW */}
@@ -278,20 +291,20 @@ const [isTyping, setIsTyping] = useState(false)
         </div>
 
         {/* CHAT BOX */}
-        <div className="bg-black/50 p-4 rounded-lg mb-4 min-h-[100px]">
+        <div className="bg-white/5 backdrop-blur-xl p-4 rounded-xl border border-white/10 mb-4 min-h-[100px]">
           <p className="text-blue-400 text-sm">AI:</p>
           {/* <p className="text-gray-200">{aiText}</p> */}
 
 
           {/* CHAT BOX */}
-<div className="bg-black/50 p-4 rounded-lg mb-4 h-60 overflow-y-auto">
+<div ref={chatRef} className="bg-white/5 backdrop-blur-xl p-3 sm:p-4 rounded-xl border border-white/10 mb-4 flex-1 overflow-y-auto">
 
-  {/* 🧠 INTRO */}
+  {/*  INTRO */}
   {phase === "intro" && (
     <p className="text-blue-300">{aiText}</p>
   )}
 
-  {/* 🎯 PILIHAN */}
+  {/*  PILIHAN */}
   {phase === "choice" && (
     <div className="flex flex-wrap gap-2">
 
@@ -321,7 +334,7 @@ const [isTyping, setIsTyping] = useState(false)
   {/* 💬 CHAT */}
   {phase === "chat" && (
     <>
-      {messages.map((msg, i) => (
+      {/* {messages.map((msg, i) => (
         <div
           key={i}
           className={`mb-2 ${
@@ -333,10 +346,28 @@ const [isTyping, setIsTyping] = useState(false)
           {msg.sender === "ai" ? "AI: " : "You: "}
           {msg.text}
         </div>
-      ))}
+      ))} */}
+      {messages.map((msg, i) => (
+  <div
+    key={i}
+    className={`mb-2 flex ${
+      msg.sender === "ai" ? "justify-start" : "justify-end"
+    }`}
+  >
+    <div
+      className={`px-3 py-2 rounded-xl max-w-[80%] ${
+        msg.sender === "ai"
+          ? "bg-blue-500/20 text-blue-300"
+          : "bg-white/10 text-white"
+      }`}
+    >
+      {msg.text}
+    </div>
+  </div>
+))}
 
       {isTyping && (
-        <p className="text-gray-400 text-sm">AI is typing...</p>
+        <p className="text-gray-400 text-sm animate-pulse">AI is typing...</p>
       )}
     </>
   )}
@@ -344,7 +375,7 @@ const [isTyping, setIsTyping] = useState(false)
 
 
 {/* INPUT */}
-<div className="flex gap-2">
+<div className="flex gap-2 flex-col sm:flex-row">
   <input
     value={input}
     onChange={(e) => setInput(e.target.value)}
@@ -352,12 +383,13 @@ const [isTyping, setIsTyping] = useState(false)
       if (e.key === "Enter") handleSend()
     }}
     placeholder="Type your message..."
-    className="flex-1 p-2 rounded bg-black/50 text-white outline-none"
+    className="flex-1 p-3 rounded-lg bg-white/5 border border-white/10 text-white outline-none"
   />
 
   <button
     onClick={handleSend}
-    className="bg-blue-500 px-4 rounded"
+    // className="bg-blue-500 px-4 py-3 rounded w-full sm:w-auto"
+    className="bg-blue-500 px-4 py-3 rounded-lg w-full sm:w-auto hover:scale-105 transition"
   >
     Send
   </button>
