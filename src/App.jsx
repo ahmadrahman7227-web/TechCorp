@@ -26,6 +26,9 @@ import CreateBlog from "./components/CreateBlog"
 import ProtectedRoute from "./components/ProtectedRoute"
 import ContactSection from "./components/ContactSection"
 import Footer from "./components/Footer"
+import ClientsSection from "./components/ClientsSection"
+import CompanyIntro from "./components/CompanyIntro"
+import CompanyParallax from "./components/CompanyParallax"
 
 
 
@@ -345,9 +348,11 @@ useEffect(() => {
               </div>
             </section>
 
-            
-            
+
               <ParallaxSection />
+              <ClientsSection />
+              <CompanyIntro />
+              <CompanyParallax />
               <AboutSection />
             </div>
             
