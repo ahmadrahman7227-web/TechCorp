@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+.cursor-glow {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(59,130,246,0.4), transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% }
+  100% { background-position: 200% }
+}
+
+/* * {
+  cursor: none;
+} */
+
+/* BACKGROUND PARALLAX */
+/* BACKGROUND */
+/* .hero-bg {
+  transform: scale(1.1);
+  animation: zoomHero 20s ease-in-out infinite alternate;
+}
+
+@keyframes zoomHero {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.15); }
+} */
+
+.grid-bg,
+.matrix,
+.core,
+.shockwave {
+  position: absolute;
+  inset: 0;
+}
+
+/* GRID */
+.grid-bg {
+  background: linear-gradient(#0ea5e9 1px, transparent 1px),
+              linear-gradient(90deg, #0ea5e9 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.08;
+  animation: moveGrid 8s linear infinite;
+}
+
+@keyframes moveGrid {
+  from { transform: translateY(0); }
+  to { transform: translateY(30px); }
+}
+
+/* MATRIX */
+.matrix span {
+  position: absolute;
+  top: -10%;
+  color: #22c55e;
+  font-size: 10px;
+  opacity: 0.4;
+  animation: matrixFall linear infinite;
+}
+
+.matrix span:nth-child(odd) { animation-duration: 5s; }
+.matrix span:nth-child(even) { animation-duration: 7s; }
+
+@keyframes matrixFall {
+  to { transform: translateY(500px); }
+}
+
+/* CORE */
+.core {
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  background: radial-gradient(circle, #3b82f6, transparent);
+  border-radius: 50%;
+  filter: blur(20px);
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.5); }
+}
+
+/* SHOCKWAVE */
+.shockwave {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  border: 2px solid rgba(59,130,246,0.3);
+  border-radius: 50%;
+  animation: shock 2s infinite;
+}
+
+@keyframes shock {
+  from { transform: scale(1); opacity: 0.6; }
+  to { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes starsMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(100px); }
+}
+
+.stars {
+  animation: starsMove 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+body {
+  overflow-x: hidden;
+}
