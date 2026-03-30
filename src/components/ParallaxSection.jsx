@@ -12,22 +12,50 @@ export default function ParallaxSection() {
 
   const [mouse, setMouse] = useState({ x: 0, y: 0 })
 
-  useEffect(() => {
-    const handleMouse = (e) => {
-      setMouse({
-        x: e.clientX,
-        y: e.clientY,
-      })
-    }
+  const [isMobile, setIsMobile] = useState(false)
 
-    window.addEventListener("mousemove", handleMouse)
-    return () => window.removeEventListener("mousemove", handleMouse)
-  }, [])
+useEffect(() => {
+  const checkMobile = () => {
+    setIsMobile(window.innerWidth < 768)
+  }
+
+  checkMobile()
+  window.addEventListener("resize", checkMobile)
+
+  return () => window.removeEventListener("resize", checkMobile)
+}, [])
+
+  // useEffect(() => {
+  //   const handleMouse = (e) => {
+  //     setMouse({
+  //       x: e.clientX,
+  //       y: e.clientY,
+  //     })
+  //   }
+
+  //   window.addEventListener("mousemove", handleMouse)
+  //   return () => window.removeEventListener("mousemove", handleMouse)
+  // }, [])
+
+  useEffect(() => {
+  if (isMobile) return
+
+  const handleMouse = (e) => {
+    setMouse({
+      x: e.clientX,
+      y: e.clientY,
+    })
+  }
+
+  window.addEventListener("mousemove", handleMouse)
+  return () => window.removeEventListener("mousemove", handleMouse)
+}, [isMobile])
+  
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-black">
 
-      {/* 🌈 BASE */}
+      {/*  BASE */}
       <motion.div
         className="absolute inset-0"
         style={{
@@ -37,9 +65,14 @@ export default function ParallaxSection() {
         }}
       />
 
-      {/* 🔥 GLOW CENTER */}
+      {/*  GLOW CENTER */}
       <motion.div
-        className="absolute w-[700px] h-[700px] bg-blue-500 rounded-full blur-[160px]"
+      className={`absolute rounded-full ${
+    isMobile
+      ? "w-[300px] h-[300px] blur-[80px]"
+      : "w-[700px] h-[700px] blur-[160px]"
+  } bg-blue-500`}
+        // className="absolute w-[700px] h-[700px] bg-blue-500 rounded-full blur-[160px]"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.15, 0.25, 0.15],
@@ -56,7 +89,7 @@ export default function ParallaxSection() {
         }}
       />
 
-      {/* 🟣 SECOND GLOW */}
+      {/* SECOND GLOW */}
       <motion.div
         className="absolute w-[500px] h-[500px] bg-purple-500 rounded-full blur-[140px] opacity-20"
         animate={{
@@ -70,11 +103,14 @@ export default function ParallaxSection() {
         }}
       />
 
-      {/* 🧠 AI NETWORK */}
+       {/* AI NETWORK
       <NeuralNetwork mouse={mouse} />
 
-      {/* 🌌 STAR */}
-      <Starfield mouse={mouse} />
+      {/*  STAR */}
+      {/* <Starfield mouse={mouse} /> */} 
+        {!isMobile && <NeuralNetwork mouse={mouse} />}
+        {!isMobile && <Starfield mouse={mouse} />}
+
 
       {/* ✨ GRID */}
       <div className="absolute inset-0 opacity-10 pointer-events-none
@@ -83,20 +119,30 @@ export default function ParallaxSection() {
       />
 
       {/* ⚡ CURSOR LIGHT 1 */}
-      <motion.div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18), transparent 40%)`
-        }}
-      />
+      {!isMobile && (
+  <>
+    <motion.div
+      className="pointer-events-none absolute inset-0"
+      style={{
+        background: radial-gradient(`circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18), transparent 40%`)
+      }}
+    />
 
       {/* ⚡ CURSOR LIGHT 2 */}
-      <motion.div
+       <motion.div
+      className="pointer-events-none absolute inset-0 z-[7]"
+      style={{
+        background: radial-gradient(`circle at ${mouse.x}px ${mouse.y}px, rgba(96,165,250,0.08), transparent 60%`)
+      }}
+    />
+  </>
+)}
+      {/* <motion.div
         className="pointer-events-none absolute inset-0 z-[7]"
         style={{
           background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(96,165,250,0.08), transparent 60%)`
         }}
-      />
+      /> */}
 
       {/* 🎯 FOCUS */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)] pointer-events-none" />
