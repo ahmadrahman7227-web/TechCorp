@@ -19,11 +19,11 @@ export default function HeroText() {
 // "intro" | "choice" | "chat"
 const isMobile = window.innerWidth < 768
 
-  useEffect(() => {
-  if (chatRef.current) {
-    chatRef.current.scrollTop = chatRef.current.scrollHeight
-  }
-}, [messages, isTyping])
+//   useEffect(() => {
+//   if (chatRef.current) {
+//     chatRef.current.scrollTop = chatRef.current.scrollHeight
+//   }
+// }, [messages, isTyping])
 
   //  MOUSE EFFECT
   useEffect(() => {
@@ -115,6 +115,12 @@ const isMobile = window.innerWidth < 768
 
 const [input, setInput] = useState("")
 const [isTyping, setIsTyping] = useState(false)
+
+useEffect(() => {
+  if (chatRef.current) {
+    chatRef.current.scrollTop = chatRef.current.scrollHeight
+  }
+}, [messages, isTyping])
 
   // logic AI
   const getResponse = (message) => {
