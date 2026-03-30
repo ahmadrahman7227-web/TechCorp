@@ -124,7 +124,7 @@ useEffect(() => {
     <motion.div
       className="pointer-events-none absolute inset-0"
       style={{
-        background: radial-gradient(`circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18), transparent 40%`)
+        background: "radial-gradient(`circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18), transparent 40%`)"
       }}
     />
 
@@ -132,17 +132,11 @@ useEffect(() => {
        <motion.div
       className="pointer-events-none absolute inset-0 z-[7]"
       style={{
-        background: radial-gradient(`circle at ${mouse.x}px ${mouse.y}px, rgba(96,165,250,0.08), transparent 60%`)
+        background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(96,165,250,0.08), transparent 60%)`
       }}
     />
   </>
 )}
-      {/* <motion.div
-        className="pointer-events-none absolute inset-0 z-[7]"
-        style={{
-          background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(96,165,250,0.08), transparent 60%)`
-        }}
-      /> */}
 
       {/* 🎯 FOCUS */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)] pointer-events-none" />

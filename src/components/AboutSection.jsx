@@ -12,13 +12,29 @@ export default function AboutSection() {
 
   const [mouse, setMouse] = useState({ x: 0, y: 0 })
 
+  const [isMobile, setIsMobile] = useState(false)
+
+useEffect(() => {
+  const checkMobile = () => {
+    setIsMobile(window.innerWidth < 768)
+  }
+
+  checkMobile()
+  window.addEventListener("resize", checkMobile)
+
+  return () => window.removeEventListener("resize", checkMobile)
+}, [])
+
   useEffect(() => {
-    const handleMouse = (e) => {
-      setMouse({ x: e.clientX, y: e.clientY })
-    }
-    window.addEventListener("mousemove", handleMouse)
-    return () => window.removeEventListener("mousemove", handleMouse)
-  }, [])
+  if (isMobile) return
+
+  const handleMouse = (e) => {
+    setMouse({ x: e.clientX, y: e.clientY })
+  }
+
+  window.addEventListener("mousemove", handleMouse)
+  return () => window.removeEventListener("mousemove", handleMouse)
+}, [isMobile])
 
   const items = [
     {
@@ -38,7 +54,7 @@ export default function AboutSection() {
   return (
     <section 
       id="about"
-      className="relative min-h-screen bg-black text-white overflow-hidden px-6 py-32"
+      className="relative min-h-screen bg-black text-white overflow-hidden px-6 md:px-12 py-24 md:py-32"
     >
 
       {/* BACKGROUND */}
@@ -48,16 +64,20 @@ export default function AboutSection() {
       />
 
       {/* AI BACKGROUND */}
-      <NeuralNetwork mouse={mouse} />
-      <Starfield mouse={mouse} />
+      {!isMobile && <NeuralNetwork mouse={mouse} />}
+      {!isMobile && <Starfield mouse={mouse} />}
+      {/* <NeuralNetwork mouse={mouse} />
+      <Starfield mouse={mouse} /> */}
 
       {/* ⚡ CURSOR LIGHT */}
-      <motion.div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.12), transparent 40%)`
-        }}
-      />
+      {!isMobile && (
+  <motion.div
+    className="pointer-events-none absolute inset-0"
+    style={{
+      background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.12), transparent 40%)`
+    }}
+  />
+)}
 
       {/* CONTENT */}
       <motion.div
@@ -70,7 +90,7 @@ export default function AboutSection() {
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-6xl font-bold mb-6
+          className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6
                      bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400
                      bg-clip-text text-transparent"
         >
@@ -151,11 +171,19 @@ export default function AboutSection() {
               transition={{ delay: i * 0.2 }}
             >
 
-              <Tilt
+              {/* <Tilt
                 tiltMaxAngleX={12}
                 tiltMaxAngleY={12}
                 perspective={1200}
                 scale={1.05}
+                transitionSpeed={2000}
+              > */}
+
+              <Tilt
+                tiltMaxAngleX={isMobile ? 0 : 12}
+                tiltMaxAngleY={isMobile ? 0 : 12}
+                perspective={1200}
+                scale={isMobile ? 1 : 1.05}
                 transitionSpeed={2000}
               >
 
