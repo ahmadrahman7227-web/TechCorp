@@ -1,12 +1,14 @@
 import { motion } from "framer-motion"
 
 const clients = [
-  "StartupX",
-  "Fintech Co",
-  "Cloudify",
-  "NeuroTech",
-  "Digital Labs",
-  "NextGen AI",
+  "Google",
+  "Microsoft",
+  "Amazon",
+  "Netflix",
+  "Tesla",
+  "Meta",
+  "Spotify",
+  "Adobe",
 ]
 
 export default function ClientsSection() {

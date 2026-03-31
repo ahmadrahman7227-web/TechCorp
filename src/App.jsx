@@ -29,6 +29,7 @@ import Footer from "./components/Footer"
 import ClientsSection from "./components/ClientsSection"
 import CompanyIntro from "./components/CompanyIntro"
 import CompanyParallax from "./components/CompanyParallax"
+import CaseStudies from "./components/CaseStudies"
 
 
 
@@ -348,93 +349,16 @@ useEffect(() => {
               </div>
             </section>
 
+              <ClientsSection />
 
               <ParallaxSection />
-              <ClientsSection />
-              <CompanyIntro />
-              <CompanyParallax />
-              <AboutSection />
+              
+              
             </div>
-            
 
-            {/* TESTIMONIAL SLIDER */}
-<section className="py-24 px-6 relative bg-black overflow-hidden">
 
-  <h2 className="text-4xl font-bold text-center mb-16 
-    bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 
-    bg-clip-text text-transparent">
-    What Our Clients Say
-  </h2>
 
-  <div className="max-w-4xl mx-auto text-center relative min-h-[300px] px-4 flex items-center justify-center">
-    {[
-      {
-        name: "John Carter",
-        role: "Startup Founder",
-        text: "TechCorp transformed our business with a powerful and scalable platform.",
-        img: "https://randomuser.me/api/portraits/men/32.jpg"
-      },
-      {
-        name: "Lisa Wong",
-        role: "Product Manager",
-        text: "The UI/UX quality is top-notch. Everything feels smooth and modern.",
-        img: "https://randomuser.me/api/portraits/women/44.jpg"
-      },
-      {
-        name: "Michael Lee",
-        role: "CTO",
-        text: "Their cloud solutions helped us scale without worrying about infrastructure.",
-        img: "https://randomuser.me/api/portraits/men/76.jpg"
-      }
-    ].map((t, i) => (
-      <motion.div
-        key={i}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{
-          opacity: currentTestimonial === i ? 1 : 0,
-          scale: currentTestimonial === i ? 1 : 0.9,
-        }}
-        transition={{ duration: 0.5 }}
-        className={`absolute inset-0 flex flex-col items-center justify-center ${
-          currentTestimonial === i ? "z-10" : "z-0"
-        }`}
-      >
-
-        {/* AVATAR */}
-        <img 
-          src={t.img} 
-          loading="lazy"
-          className="w-20 h-20 rounded-full mb-4 border-2 border-blue-400" 
-        />
-        {/* <img
-          src={t.img}
-          className="w-20 h-20 rounded-full mb-4 border-2 border-blue-400"
-        /> */}
-
-        {/* TEXT */}
-        <p className="text-gray-300 mb-4 text-lg max-w-xl">
-          “{t.text}”
-        </p>
-
-        {/* ⭐ RATING */}
-        <div className="flex gap-1 mb-2">
-          {"★★★★★".split("").map((star, idx) => (
-            <span key={idx} className="text-yellow-400">{star}</span>
-          ))}
-        </div>
-
-        {/* NAME */}
-        <h4 className="font-semibold">{t.name}</h4>
-        <p className="text-sm text-blue-400">{t.role}</p>
-
-      </motion.div>
-    ))}
-
-  </div>
-</section>
-
-           
-            {/* SERVICES */}
+              {/* SERVICES */}
 <section id="services" className="py-24 px-6 md:px-12 relative">
 
   <div className="absolute inset-0 pointer-events-none">
@@ -539,6 +463,98 @@ useEffect(() => {
 
 </section>
 
+
+<div className="pt-20 overflow-x-hidden">
+    <CaseStudies />
+</div>
+          
+
+            {/* TESTIMONIAL SLIDER */}
+<section className="py-24 px-6 relative bg-black overflow-hidden">
+
+  <h2 className="text-4xl font-bold text-center mb-16 
+    bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 
+    bg-clip-text text-transparent">
+    What Our Clients Say
+  </h2>
+
+  <div className="max-w-4xl mx-auto text-center relative min-h-[300px] px-4 flex items-center justify-center">
+    {[
+      {
+        name: "John Carter",
+        role: "Startup Founder",
+        text: "TechCorp transformed our business with a powerful and scalable platform.",
+        img: "https://randomuser.me/api/portraits/men/32.jpg"
+      },
+      {
+        name: "Lisa Wong",
+        role: "Product Manager",
+        text: "The UI/UX quality is top-notch. Everything feels smooth and modern.",
+        img: "https://randomuser.me/api/portraits/women/44.jpg"
+      },
+      {
+        name: "Michael Lee",
+        role: "CTO",
+        text: "Their cloud solutions helped us scale without worrying about infrastructure.",
+        img: "https://randomuser.me/api/portraits/men/76.jpg"
+      }
+    ].map((t, i) => (
+      <motion.div
+        key={i}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{
+          opacity: currentTestimonial === i ? 1 : 0,
+          scale: currentTestimonial === i ? 1 : 0.9,
+        }}
+        transition={{ duration: 0.5 }}
+        className={`absolute inset-0 flex flex-col items-center justify-center ${
+          currentTestimonial === i ? "z-10" : "z-0"
+        }`}
+      >
+
+        {/* AVATAR */}
+        <img 
+          src={t.img} 
+          loading="lazy"
+          className="w-20 h-20 rounded-full mb-4 border-2 border-blue-400" 
+        />
+        {/* <img
+          src={t.img}
+          className="w-20 h-20 rounded-full mb-4 border-2 border-blue-400"
+        /> */}
+
+        {/* TEXT */}
+        <p className="text-gray-300 mb-4 text-lg max-w-xl">
+          “{t.text}”
+        </p>
+
+        {/* ⭐ RATING */}
+        <div className="flex gap-1 mb-2">
+          {"★★★★★".split("").map((star, idx) => (
+            <span key={idx} className="text-yellow-400">{star}</span>
+          ))}
+        </div>
+
+        {/* NAME */}
+        <h4 className="font-semibold">{t.name}</h4>
+        <p className="text-sm text-blue-400">{t.role}</p>
+
+      </motion.div>
+    ))}
+
+  </div>
+</section>
+
+    <div className="pt-20 overflow-x-hidden">
+
+            <CompanyIntro />
+            
+            <AboutSection />
+
+            <CompanyParallax />
+
+      </div>
+              
             <TeamSection />
 
             <BlogSection />
