@@ -349,6 +349,12 @@ useEffect(() => {
               </div>
             </section>
 
+            
+
+              <CompanyIntro />
+
+              <CompanyParallax />
+
               <ClientsSection />
 
               <AboutSection />
@@ -467,12 +473,12 @@ useEffect(() => {
 
 
 <div className="pt-20 overflow-x-hidden">
+
     <CaseStudies />
+
 </div>
 
         
-        
-
             {/* TESTIMONIAL SLIDER */}
 <section className="py-24 px-6 relative bg-black overflow-hidden">
 
@@ -548,17 +554,7 @@ useEffect(() => {
 
   </div>
 </section>
-
-          <div className="pt-20 overflow-x-hidden">
-
-             <CompanyIntro />
-
-            <CompanyParallax />
-
-      </div>
           
-
-              
             <TeamSection />
 
             <BlogSection />
