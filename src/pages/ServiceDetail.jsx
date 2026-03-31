@@ -93,7 +93,11 @@ export default function ServiceDetail() {
         <p className="text-gray-400 mb-6">{service.useCase}</p>
 
         {/* CTA */}
-        <button className="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg">
+        <button 
+          onClick={() => {
+            window.location.href = "/#contact"
+          }}
+          className="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg">
           Contact Us →
         </button>
       </div>

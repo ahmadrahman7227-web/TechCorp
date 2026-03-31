@@ -30,6 +30,8 @@ import ClientsSection from "./components/ClientsSection"
 import CompanyIntro from "./components/CompanyIntro"
 import CompanyParallax from "./components/CompanyParallax"
 import CaseStudies from "./components/CaseStudies"
+import WhyChooseUs from "./components/WhyChooseUs"
+import CompanyStory from "./components/CompanyStory"
 
 
 
@@ -350,14 +352,17 @@ useEffect(() => {
             </section>
 
             
+              <ClientsSection />
 
               <CompanyIntro />
 
               <CompanyParallax />
 
-              <ClientsSection />
-
               <AboutSection />
+
+              <WhyChooseUs />    
+
+              <CompanyStory />   
 
               <ParallaxSection />
               
