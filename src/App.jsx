@@ -134,7 +134,7 @@ useEffect(() => {
       <Route
         path="/"
         element={
-          <div className="font-[Poppins] bg-black text-white scroll-smooth overflow-x-hidden">
+          <div className="font-[Poppins] text-white scroll-smooth overflow-x-hidden">
 
             {/* LOADING */}
             {loading && <LoadingScreen />}
@@ -144,12 +144,15 @@ useEffect(() => {
             {/* <CustomCursor /> */}
 
             {/* BACKGROUND */}
-            <div className="fixed inset-0 -z-10 pointer-events-none">
+            {/* <div className="fixed inset-0 -z-20 pointer-events-none">
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-black via-blue-950 to-black animate-gradient"></div>
 
               <div className="absolute w-[500px] h-[500px] pointer-events-none bg-blue-500/20 blur-3xl rounded-full top-[-100px] left-[-100px] animate-aurora"></div>
 
-              <div className="absolute w-[400px] h-[400px] pointer-events-none bg-purple-500/20 blur-3xl rounded-full bottom-[-100px] right-[-100px] animate-aurora2"></div>
+              <div className="absolute w-[400px] h-[400px] pointer-events-none bg-purple-500/20 blur-3xl rounded-full bottom-[-100px] right-[-100px] animate-aurora2"></div> */}
+              
+              
+              
               {/* {!isMobile && (
             <>
               <div className="absolute w-[500px] h-[500px] bg-blue-500/20 blur-3xl rounded-full top-[-100px] left-[-100px] animate-aurora"></div>
@@ -157,8 +160,26 @@ useEffect(() => {
               <div className="absolute w-[400px] h-[400px] bg-purple-500/20 blur-3xl rounded-full bottom-[-100px] right-[-100px] animate-aurora2"></div>
             </>
           )} */}
-            </div>
+            {/* </div> */}
 
+
+            {/* GLOBAL BACKGROUND */}
+<div className="fixed inset-0 -z-20 pointer-events-none bg-[#020617]">
+
+  {/* BASE GRADIENT */}
+  <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#020617] to-black"></div>
+
+  {/* CENTER LIGHT */}
+  <div className="absolute inset-0 flex items-center justify-center">
+    <div className="w-[800px] h-[800px] bg-blue-500/10 blur-[120px] rounded-full"></div>
+  </div>
+
+  {/* NOISE TEXTURE */}
+  <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+
+</div>
+
+                
             {/* NAVBAR */}
             <motion.nav
               initial={{ y: -80, opacity: 0 }}
@@ -363,12 +384,13 @@ useEffect(() => {
               <WhyChooseUs />    
 
               <CompanyStory />   
-
-              <ParallaxSection />
-              
-              
+                        
             </div>
 
+
+{/* <div className="relative z-10 bg-black"> */}
+
+               <ParallaxSection />
 
 
               {/* SERVICES */}
@@ -485,7 +507,7 @@ useEffect(() => {
 
         
             {/* TESTIMONIAL SLIDER */}
-<section className="py-24 px-6 relative bg-black overflow-hidden">
+<section className="py-24 px-6 relative overflow-hidden">
 
   <h2 className="text-4xl font-bold text-center mb-16 
     bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 
@@ -567,6 +589,7 @@ useEffect(() => {
             <ContactSection />
 
             <Footer />
+            {/* </div> */}
 
           </div>
         }

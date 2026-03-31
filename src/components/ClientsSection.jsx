@@ -13,15 +13,15 @@ const clients = [
 
 export default function ClientsSection() {
   return (
-    <section className="relative py-24 bg-black overflow-hidden">
+    <section className="relative py-24 overflow-hidden">
 
-      {/* 🔥 BACKGROUND GLOW */}
+      {/*  BACKGROUND GLOW */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="w-[500px] h-[500px] bg-blue-500/10 blur-3xl rounded-full absolute top-0 left-0"></div>
         <div className="w-[400px] h-[400px] bg-purple-500/10 blur-3xl rounded-full absolute bottom-0 right-0"></div>
       </div>
 
-      {/* 🔥 TITLE */}
+      {/*  TITLE */}
       <div className="text-center mb-16 relative z-10">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold 
         bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 
@@ -34,13 +34,13 @@ export default function ClientsSection() {
         </p>
       </div>
 
-      {/* 🔥 GRADIENT FADE LEFT */}
+      {/*  GRADIENT FADE LEFT */}
       <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-black to-transparent z-20" />
 
-      {/* 🔥 GRADIENT FADE RIGHT */}
+      {/*  GRADIENT FADE RIGHT */}
       <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-black to-transparent z-20" />
 
-      {/* 🔥 MARQUEE */}
+      {/*  MARQUEE */}
       <div className="overflow-hidden relative z-10">
 
         <motion.div
@@ -73,7 +73,7 @@ export default function ClientsSection() {
 
       </div>
 
-      {/* 🔥 SECOND ROW (REVERSE — BIAR LEBIH HIDUP) */}
+      {/*  SECOND ROW (REVERSE — BIAR LEBIH HIDUP) */}
       <div className="overflow-hidden mt-10 relative z-10">
 
         <motion.div
@@ -104,7 +104,27 @@ export default function ClientsSection() {
 
       </div>
 
-      {/* 🔥 OPTIONAL STATS */}
+      {/*  OPTIONAL STATS */}
+      {/* <div className="mt-16 flex flex-wrap justify-center gap-10 text-center relative z-10 text-white/70">
+            {[
+              { value: "20+", label: "Projects" },
+              { value: "10+", label: "Clients" },
+              { value: "3+", label: "Technologies" },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.2 }}
+              >
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text">
+                  {item.value}
+                </h3>
+                <p className="text-gray-500 text-xs mt-1">{item.label}</p>
+              </motion.div>
+            ))}
+          </div> */}
+
       <div className="mt-16 flex flex-wrap justify-center gap-10 text-center relative z-10 text-white/70">
 
         <div>

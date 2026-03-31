@@ -4,7 +4,7 @@ import office from "../assets/office.jpg"
 
 export default function CompanyIntro() {
   return (
-    <SectionWrapper className="relative bg-black overflow-hidden">
+    <SectionWrapper className="relative overflow-hidden">
 
       {/* BACKGROUND LIGHT FX */}
       <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-blue-500/10 blur-[140px]" />

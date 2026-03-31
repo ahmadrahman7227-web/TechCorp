@@ -53,7 +53,7 @@ useEffect(() => {
   
 
    return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-black">
+    <section className="relative min-h-screen w-full overflow-hidden">
 
       {/* BASE */}
       <motion.div

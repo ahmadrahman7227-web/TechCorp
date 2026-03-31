@@ -6,32 +6,38 @@ export default function WhyChooseUs() {
   const items = [
     {
       title: "Fast Execution",
-      desc: "We deliver high-quality products with speed and precision."
+      desc: "We deliver high-quality products with speed and precision.",
+      icon: "⚡"
     },
     {
       title: "Scalable Systems",
-      desc: "Architecture designed to grow with your business."
+      desc: "Architecture designed to grow with your business.",
+      icon: "📈"
     },
     {
       title: "AI Integration",
-      desc: "Smart automation to boost efficiency and insights."
+      desc: "Smart automation to boost efficiency and insights.",
+      icon: "🤖"
     },
     {
       title: "Clean Code",
-      desc: "Maintainable, readable, and future-proof development."
+      desc: "Maintainable, readable, and future-proof development.",
+      icon: "🧠"
     },
     {
       title: "Business Focus",
-      desc: "We don’t just build — we solve real business problems."
+      desc: "We don’t just build — we solve real business problems.",
+      icon: "💼"
     },
     {
       title: "Modern Tech Stack",
-      desc: "Using cutting-edge tools for maximum performance."
+      desc: "Using cutting-edge tools for maximum performance.",
+      icon: "🚀"
     }
   ]
 
   return (
-    <section id="why" className="py-28 bg-black text-white px-6">
+    <section id="why" className="py-28 text-white px-6">
 
       <div className="max-w-6xl mx-auto text-center">
 
@@ -39,7 +45,10 @@ export default function WhyChooseUs() {
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold mb-6"
+          transition={{ duration: 0.8 }}
+          className="text-4xl md:text-5xl font-bold mb-6
+                     bg-gradient-to-r from-blue-400 to-purple-500
+                     bg-clip-text text-transparent"
         >
           Why Choose Us
         </motion.h2>
@@ -61,25 +70,38 @@ export default function WhyChooseUs() {
               <Tilt
                 tiltMaxAngleX={10}
                 tiltMaxAngleY={10}
-                scale={1.05}
+                perspective={1200}
+                scale={1.03}
                 transitionSpeed={2000}
               >
-                <div className="p-8 rounded-2xl border border-white/10 
-                                bg-white/5 backdrop-blur-xl
-                                hover:border-blue-500 transition group">
+                <div className="relative p-8 rounded-2xl border border-white/10 
+                                bg-white/5 backdrop-blur-xl overflow-hidden group
+                                hover:border-blue-500/40 transition duration-300">
 
-                  {/* Glow */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition
-                    bg-gradient-to-r from-blue-500/20 via-cyan-400/20 to-purple-500/20 blur-xl rounded-2xl"
+                  {/* 🔥 GLOW */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500
+                    bg-gradient-to-br from-blue-500/20 via-cyan-400/20 to-purple-500/20 blur-xl"
                   />
 
-                  <h3 className="text-lg font-semibold mb-3 relative z-10">
+                  {/* 🔥 ICON */}
+                  <div className="text-4xl mb-4 relative z-10">
+                    {item.icon}
+                  </div>
+
+                  {/* TITLE */}
+                  <h3 className="text-xl font-semibold mb-3 relative z-10">
                     {item.title}
                   </h3>
 
-                  <p className="text-sm text-gray-400 relative z-10">
+                  {/* DESC */}
+                  <p className="text-sm opacity-70 relative z-10 leading-relaxed">
                     {item.desc}
                   </p>
+
+                  {/* 🔥 HOVER LINE */}
+                  <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r 
+                    from-blue-400 to-purple-500 group-hover:w-full transition-all duration-500"
+                  />
 
                 </div>
               </Tilt>

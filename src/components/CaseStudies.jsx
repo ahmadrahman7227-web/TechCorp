@@ -23,7 +23,7 @@ const projects = [
 
 export default function CaseStudies() {
   return (
-    <section id="case-studies" className="relative py-28 bg-black overflow-hidden">
+    <section id="case-studies" className="relative py-28 overflow-hidden">
 
       {/* BACKGROUND GLOW */}
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/10 blur-[140px]" />

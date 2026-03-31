@@ -35,19 +35,19 @@ export default function AboutSection() {
   }, [isMobile])
 
   const items = [
-    {
-      title: "AI-Powered Systems",
-      desc: "We build intelligent systems that automate workflows and enhance decision-making."
-    },
-    {
-      title: "Scalable Architecture",
-      desc: "Designed to grow with your business using modern cloud infrastructure."
-    },
-    {
-      title: "Future-Ready Tech",
-      desc: "We use cutting-edge technologies to keep you ahead of competitors."
-    }
-  ]
+  {
+    title: "Business-Oriented",
+    desc: "Every product we build is designed to solve real business problems."
+  },
+  {
+    title: "Performance First",
+    desc: "Speed, scalability, and reliability are at the core of everything we do."
+  },
+  {
+    title: "Modern Stack",
+    desc: "We use the latest technologies to ensure long-term growth and flexibility."
+  }
+]
 
   return (
     <section 
@@ -90,7 +90,7 @@ export default function AboutSection() {
                      bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400
                      bg-clip-text text-transparent"
         >
-          Engineering the Future of Digital Systems
+          We Build Digital Products That Actually Work
         </motion.h2>
 
         {/* DESC */}
@@ -100,8 +100,8 @@ export default function AboutSection() {
           transition={{ delay: 0.3 }}
           className="text-lg opacity-70 max-w-2xl mx-auto mb-20"
         >
-          We design and build scalable, high-performance digital products 
-          that help businesses grow faster and smarter.
+          We focus on delivering real business impact through scalable systems, 
+          modern design, and performance-driven development.
         </motion.p>
 
         {/* CARDS */}
