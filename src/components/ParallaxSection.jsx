@@ -1,121 +1,121 @@
-import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useRef } from "react"
 
-export default function ParallaxSection() {
-  const [mouse, setMouse] = useState({ x: 0, y: 0 })
+export default function TrustedSection() {
+  const ref = useRef(null)
 
-  useEffect(() => {
-    const handleMouse = (e) => {
-      setMouse({ x: e.clientX, y: e.clientY })
-    }
-    window.addEventListener("mousemove", handleMouse)
-    return () => window.removeEventListener("mousemove", handleMouse)
-  }, [])
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  })
+
+  // 🔥 Trusted fade out
+  const trustedOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
+  const trustedY = useTransform(scrollYProgress, [0, 0.3], [0, -100])
+
+  // 🔥 Parallax content fade in
+  const contentOpacity = useTransform(scrollYProgress, [0.3, 0.6], [0, 1])
+  const contentY = useTransform(scrollYProgress, [0.3, 0.6], [100, 0])
 
   return (
-    <section className="relative w-full py-28 flex items-center justify-center overflow-hidden text-white">
+    <section
+      ref={ref}
+      className="relative h-[180vh] overflow-hidden text-white"
+    >
 
-      {/* 🌌 BACKGROUND */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#020617] to-black" />
-
-      {/* 🔵 SOFT GLOW */}
+      {/* 🔥 TRUSTED SECTION */}
       <motion.div
-        className="absolute w-[500px] h-[500px] bg-blue-500/20 blur-[140px] rounded-full"
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{ duration: 6, repeat: Infinity }}
-        style={{
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      />
-
-      {/* 🟣 SECOND GLOW */}
-      <motion.div
-        className="absolute w-[400px] h-[400px] bg-purple-500/20 blur-[120px] rounded-full"
-        animate={{
-          x: mouse.x * -0.02,
-          y: mouse.y * -0.02,
-        }}
-        transition={{ type: "spring", stiffness: 40 }}
-        style={{ top: "60%", left: "40%" }}
-      />
-
-      {/* ✨ CURSOR LIGHT */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.12), transparent 40%)`
-        }}
-      />
-
-      {/* 📦 CONTENT */}
-      <motion.div
-        initial={{ opacity: 0, y: 80 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="relative z-10 max-w-5xl text-center px-6"
+        style={{ opacity: trustedOpacity, y: trustedY }}
+        className="sticky top-0 h-screen flex flex-col items-center justify-center"
       >
-
-        {/* 🔥 HEADLINE */}
-        <h2 className="text-4xl md:text-6xl font-bold mb-6
-          bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400
-          bg-clip-text text-transparent">
-          From Vision to Intelligent Systems
+        <h2 className="text-3xl md:text-5xl font-bold mb-6 text-center">
+          Trusted by Innovative Companies
         </h2>
 
-        {/* ✍️ SUBTEXT */}
-        <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto mb-16">
-          We transform ideas into scalable, AI-powered digital ecosystems 
-          that drive real business growth.
+        <p className="text-gray-400 mb-10 text-center">
+          Partnering with modern businesses to build scalable digital solutions
         </p>
 
-        {/* ⚡ PILLARS */}
-        <div className="grid md:grid-cols-3 gap-8">
-
-          {[
-            {
-              title: "AI-Driven Innovation",
-              desc: "We leverage artificial intelligence to create smarter, adaptive systems."
-            },
-            {
-              title: "Scalable Architecture",
-              desc: "Our solutions are built to grow with your business, without limits."
-            },
-            {
-              title: "Business Impact",
-              desc: "We focus on delivering measurable results, not just clean code."
-            }
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ y: -10, scale: 1.03 }}
-              className="relative p-6 rounded-2xl
-              bg-white/5 backdrop-blur-xl border border-white/10
-              shadow-[0_0_40px_rgba(59,130,246,0.1)]
-              transition-all duration-300"
-            >
-              {/* glow */}
-              <div className="absolute inset-0 opacity-0 hover:opacity-100 transition
-                bg-gradient-to-br from-blue-500/10 to-purple-500/10 blur-xl" />
-
-              <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-              <p className="text-sm text-white/70">{item.desc}</p>
-            </motion.div>
-          ))}
-
+        {/* LOGO TEXT */}
+        <div className="flex flex-wrap justify-center gap-6 text-gray-500 text-sm tracking-widest">
+          <span>MICROSOFT</span>
+          <span>AMAZON</span>
+          <span>NETFLIX</span>
+          <span>TESLA</span>
+          <span>META</span>
+          <span>SPOTIFY</span>
         </div>
 
-        {/* 📊 PROOF */}
-        <p className="text-white/40 text-sm mt-16">
-          Trusted by startups & enterprises worldwide
-        </p>
-
+        {/* STATS */}
+        <div className="flex gap-10 mt-10 text-center">
+          <div>
+            <p className="text-xl font-bold">20+</p>
+            <p className="text-xs text-gray-400">Projects</p>
+          </div>
+          <div>
+            <p className="text-xl font-bold">10+</p>
+            <p className="text-xs text-gray-400">Clients</p>
+          </div>
+          <div>
+            <p className="text-xl font-bold">5+</p>
+            <p className="text-xs text-gray-400">Technologies</p>
+          </div>
+        </div>
       </motion.div>
 
-      {/* 🌑 BOTTOM FADE */}
-      <div className="absolute bottom-0 w-full h-[200px] 
-        bg-gradient-to-t from-black via-black/80 to-transparent" />
+      {/* 🔥 PARALLAX CONTENT (LANJUTAN, BUKAN SECTION BARU) */}
+      <motion.div
+        style={{ opacity: contentOpacity, y: contentY }}
+        className="sticky top-0 h-screen flex items-center justify-center"
+      >
+        <div className="text-center max-w-4xl px-6">
+
+          <h2 className="
+            text-3xl sm:text-4xl md:text-6xl font-bold mb-6
+            bg-gradient-to-r from-blue-400 to-purple-400
+            bg-clip-text text-transparent
+          ">
+            From Vision to Intelligent Systems
+          </h2>
+
+          <p className="text-gray-400 mb-12">
+            We transform ideas into scalable, AI-powered digital ecosystems 
+            designed for performance, growth, and real impact.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-6">
+
+            <div className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur">
+              <h3 className="text-white mb-2 font-semibold">
+                AI-Driven Innovation
+              </h3>
+              <p className="text-gray-400 text-sm">
+                Smart systems that adapt and evolve with your business.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur">
+              <h3 className="text-white mb-2 font-semibold">
+                Scalable Architecture
+              </h3>
+              <p className="text-gray-400 text-sm">
+                Built for growth, performance, and long-term stability.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur">
+              <h3 className="text-white mb-2 font-semibold">
+                Business Impact
+              </h3>
+              <p className="text-gray-400 text-sm">
+                We deliver measurable results, not just clean code.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </motion.div>
 
     </section>
   )

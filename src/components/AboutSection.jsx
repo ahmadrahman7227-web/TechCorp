@@ -4,7 +4,7 @@ import Tilt from "react-parallax-tilt"
 
 export default function AboutSection() {
   const { scrollY } = useScroll()
-  const yParallax = useTransform(scrollY, [0, 600], [0, -100])
+  const yParallax = useTransform(scrollY, [0, 600], [0, -60])
 
   const [mouse, setMouse] = useState({ x: 0, y: 0 })
   const [isMobile, setIsMobile] = useState(false)
@@ -40,59 +40,26 @@ export default function AboutSection() {
 
   const text = "We Build Digital Products That Actually Work".split(" ")
 
-  const container = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.05
-      }
-    }
-  }
-
-  const wordAnim = {
-    hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
-    show: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.6 }
-    }
-  }
-
-  const cardAnim = {
-    hidden: { opacity: 0, y: 60, scale: 0.95 },
-    show: (i) => ({
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        delay: i * 0.15,
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    })
-  }
-
   return (
-    <section 
+    <section
       id="about"
-      className="relative z-10 text-white overflow-hidden px-4 sm:px-6 md:px-12 py-24 md:py-32"
+      className="relative z-10 text-white overflow-hidden px-4 sm:px-6 md:px-12 py-28 md:py-36"
     >
 
-      {/* 🔥 DARK BASE (BIAR KONTRAS NAIK) */}
-      <div className="absolute inset-0 bg-[#020617]/80 z-[1]" />
+      {/* 🔥 HAPUS BACKGROUND GELAP FULL — GANTI JADI SOFT BLEND */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#020617]/40 to-transparent z-[1]" />
 
-      {/* 🔥 RADIAL FOCUS */}
-      <div className="absolute inset-0 z-[2] 
-        bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_70%)]" 
+      {/* 🔥 SOFT RADIAL (BIAR ADA FOKUS TANPA PUTUS BG) */}
+      <div className="absolute inset-0 z-[2]
+        bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08),transparent_70%)]" 
       />
 
-      {/* 🔥 CURSOR LIGHT (SOFT) */}
+      {/* 🔥 CURSOR LIGHT */}
       {!isMobile && (
         <motion.div
           className="pointer-events-none absolute inset-0 z-[3]"
           style={{
-            background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.08), transparent 40%)`
+            background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.06), transparent 40%)`
           }}
         />
       )}
@@ -104,16 +71,10 @@ export default function AboutSection() {
       >
 
         {/* TITLE */}
-        <motion.h2
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight"
-        >
+        <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight">
           {text.map((word, i) => (
-            <motion.span
+            <span
               key={i}
-              variants={wordAnim}
               className={`inline-block mr-2 ${
                 word === "Digital" || word === "Work"
                   ? "bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
@@ -121,20 +82,15 @@ export default function AboutSection() {
               }`}
             >
               {word}
-            </motion.span>
+            </span>
           ))}
-        </motion.h2>
+        </h2>
 
         {/* DESC */}
-        <motion.p
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="text-sm sm:text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-16 md:mb-20"
-        >
-          We focus on delivering real business impact through scalable systems, 
+        <p className="text-sm sm:text-base md:text-lg text-white/70 max-w-2xl mx-auto mb-16 md:mb-20">
+          We focus on delivering real business impact through scalable systems,
           modern design, and performance-driven development.
-        </motion.p>
+        </p>
 
         {/* CARDS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
@@ -142,39 +98,32 @@ export default function AboutSection() {
           {items.map((item, i) => (
             <motion.div
               key={i}
-              custom={i}
-              variants={cardAnim}
-              initial="hidden"
-              whileInView="show"
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.15 }}
             >
               <Tilt
-                tiltMaxAngleX={isMobile ? 0 : 8}
-                tiltMaxAngleY={isMobile ? 0 : 8}
-                scale={isMobile ? 1 : 1.04}
-                perspective={1000}
-                transitionSpeed={1500}
+                tiltMaxAngleX={isMobile ? 0 : 6}
+                tiltMaxAngleY={isMobile ? 0 : 6}
+                scale={isMobile ? 1 : 1.03}
               >
-                <div className="relative p-6 md:p-8 rounded-2xl border border-white/10 
-                                bg-white/5 backdrop-blur-xl overflow-hidden group
-                                hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(59,130,246,0.2)]
-                                transition-all duration-300">
+                <div className="
+                  relative p-6 md:p-8 rounded-2xl
+                  border border-white/10
+                  bg-white/[0.03]
+                  backdrop-blur-xl
+                  hover:-translate-y-2
+                  hover:shadow-[0_0_40px_rgba(59,130,246,0.15)]
+                  transition-all duration-300
+                ">
 
-                  {/* GLOW */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500
-                    bg-gradient-to-br from-blue-500/10 via-cyan-400/10 to-purple-500/10 blur-2xl"
-                  />
-
-                  <h3 className="text-lg md:text-xl font-semibold mb-2 relative z-10">
+                  <h3 className="text-lg md:text-xl font-semibold mb-2">
                     {item.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-white/70 relative z-10 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-white/60 leading-relaxed">
                     {item.desc}
                   </p>
-
-                  <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r 
-                    from-blue-400 to-purple-500 group-hover:w-full transition-all duration-500"
-                  />
 
                 </div>
               </Tilt>
@@ -184,43 +133,29 @@ export default function AboutSection() {
         </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mt-16 md:mt-20"
-        >
+        <div className="mt-16 md:mt-20">
           <button
             onClick={() => {
               document.getElementById("services")?.scrollIntoView({
                 behavior: "smooth",
               })
             }}
-            className="px-6 md:px-8 py-3 rounded-full font-semibold text-white 
-                       bg-gradient-to-r from-blue-500 to-purple-600
-                       hover:scale-105 hover:shadow-lg
-                       transition duration-300"
+            className="
+              px-6 md:px-8 py-3 rounded-full font-semibold text-white
+              bg-gradient-to-r from-blue-500 to-purple-600
+              hover:scale-105 hover:shadow-lg
+              transition duration-300
+            "
           >
             Explore Our Services →
           </button>
-        </motion.div>
+        </div>
 
       </motion.div>
 
-      {/* LINE */}
-      <motion.div
-        className="absolute bottom-10 md:bottom-16 left-1/2 w-[250px] md:w-[400px] h-[2px]
-                   bg-gradient-to-r from-transparent via-blue-500 to-transparent"
-        animate={{
-          opacity: [0.2, 1, 0.2],
-          scaleX: [0.8, 1.2, 0.8],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-        }}
-        style={{ transform: "translateX(-50%)" }}
-      />
+      {/* 🔥 TRANSISI ATAS & BAWAH (PENTING BANGET) */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#020617] to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-[#020617] pointer-events-none" />
 
     </section>
   )

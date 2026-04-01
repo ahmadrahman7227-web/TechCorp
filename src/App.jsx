@@ -366,12 +366,13 @@ useEffect(() => {
 
             
               <ClientsSection />
-
-              <ParallaxSection />
+              
+              <CompanyParallax />
+              {/* <ParallaxSection /> */}
 
               <CompanyIntro />
 
-              <CompanyParallax />
+              {/* <CompanyParallax /> */}
 
               <AboutSection />
 

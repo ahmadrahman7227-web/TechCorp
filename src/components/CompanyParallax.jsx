@@ -10,13 +10,21 @@ export default function CompanyParallax() {
     offset: ["start end", "end start"],
   })
 
-  // 🔥 PARALLAX DEPTH
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
-  const scaleBg = useTransform(scrollYProgress, [0, 1], [1.1, 1.2])
-  const opacityOverlay = useTransform(scrollYProgress, [0, 1], [0.4, 0.8])
-  const fadeOut = useTransform(scrollYProgress, [0, 1], [1, 0.2])
+  // 🔥 PARALLAX DEPTH (lebih halus & natural)
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "20%"])
+  const scaleBg = useTransform(scrollYProgress, [0, 1], [1.02, 1.12])
+  const opacityOverlay = useTransform(scrollYProgress, [0, 1], [0.45, 0.75])
 
-  // 🔥 MOUSE INTERACTION
+  // 🔥 SMOOTH FADE GLOBAL (ini kunci)
+  const opacitySection = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0])
+
+  // 🔥 CONTENT FLOAT (biar cinematic)
+  const yContent = useTransform(scrollYProgress, [0, 1], [80, -60])
+
+  // 🔥 GRID FADE IN (biar ga muncul kasar)
+  const gridOpacity = useTransform(scrollYProgress, [0.4, 1], [0, 1])
+
+  // 🔥 MOUSE GLOW
   const [mouse, setMouse] = useState({ x: 0, y: 0 })
   const [isMobile, setIsMobile] = useState(false)
 
@@ -29,22 +37,24 @@ export default function CompanyParallax() {
 
   useEffect(() => {
     if (isMobile) return
-
-    const handleMouse = (e) => {
-      setMouse({ x: e.clientX, y: e.clientY })
-    }
-
+    const handleMouse = (e) => setMouse({ x: e.clientX, y: e.clientY })
     window.addEventListener("mousemove", handleMouse)
     return () => window.removeEventListener("mousemove", handleMouse)
   }, [isMobile])
 
   return (
     <>
-      <section
+      <motion.section
         ref={ref}
-        className="relative h-[65vh] md:h-[85vh] overflow-hidden flex items-center justify-center"
+        style={{ opacity: opacitySection }}
+        className="relative h-[75vh] md:h-[95vh] overflow-hidden flex items-center justify-center"
       >
-        {/* 🌌 BACKGROUND IMAGE */}
+
+        {/* 🔥 TOP BLEND (SUPER HALUS) */}
+        <div className="absolute top-0 left-0 w-full h-60 
+          bg-gradient-to-b from-[#020617] via-[#020617]/70 to-transparent z-20" />
+
+        {/* 🔥 BACKGROUND */}
         <motion.div
           style={{ y: yBg, scale: scaleBg }}
           className="absolute inset-0"
@@ -56,125 +66,136 @@ export default function CompanyParallax() {
           />
         </motion.div>
 
-        {/* 🌑 DARK OVERLAY */}
+        {/* 🔥 DARK OVERLAY */}
         <motion.div
           style={{ opacity: opacityOverlay }}
           className="absolute inset-0 bg-black"
         />
 
-        {/* 🌈 COLOR DEPTH (BIAR NYATU KE THEME) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-[#020617]" />
+        {/* 🔥 GLOBAL COLOR BLEND */}
+        <div className="absolute inset-0 
+          bg-gradient-to-b from-[#020617] via-transparent to-[#020617]" />
 
-        {/* ✨ LIGHT LEAK (ADVANCED FEEL) */}
-        <div className="absolute top-[-20%] left-[20%] w-[500px] h-[500px] bg-purple-500/10 blur-[150px] rounded-full" />
-        <div className="absolute bottom-[-20%] right-[20%] w-[500px] h-[500px] bg-blue-500/10 blur-[150px] rounded-full" />
+        {/* 🔥 CONNECTOR LIGHT (ini bikin nyatu antar section) */}
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 
+          w-[700px] h-[350px] bg-blue-500/10 blur-[160px] rounded-full" />
 
-        {/* 🔥 MOUSE GLOW */}
+        {/* 🔥 EXTRA DEPTH */}
+        <div className="absolute bottom-[-25%] right-[15%] 
+          w-[600px] h-[600px] bg-purple-500/10 blur-[180px] rounded-full" />
+
+        {/* 🔥 MOUSE INTERACTION */}
         {!isMobile && (
-          <>
-            <motion.div
-              className="pointer-events-none absolute inset-0"
-              style={{
-                background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.15), transparent 40%)`,
-              }}
-            />
-
-            <motion.div
-              className="pointer-events-none absolute inset-0"
-              style={{
-                background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(168,85,247,0.12), transparent 60%)`,
-              }}
-            />
-          </>
+          <motion.div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.12), transparent 45%)`,
+            }}
+          />
         )}
 
         {/* 🔥 MAIN CONTENT */}
         <motion.div
-          style={{ opacity: fadeOut }}
-          className="relative z-10 text-center px-4 max-w-4xl"
+          style={{ y: yContent }}
+          className="relative z-30 text-center px-4 max-w-5xl"
         >
-          {/* TITLE */}
           <motion.h2
-            initial={{ opacity: 0, y: 80 }}
+            initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
             className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight
               bg-gradient-to-r from-white via-blue-200 to-purple-300
               bg-clip-text text-transparent"
           >
-            Building Future-Ready <br /> Digital Experiences
+            From Vision to Intelligent Systems
           </motion.h2>
 
-          {/* SUBTEXT */}
           <motion.p
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-gray-300 text-sm sm:text-base md:text-lg mb-8 leading-relaxed"
+            className="text-gray-300 text-sm sm:text-base md:text-lg mb-12"
           >
-            We design scalable, high-performance systems powered by modern
-            architecture, AI, and human-centered design.
+            We transform ideas into scalable, AI-powered digital ecosystems 
+            that drive real business growth and long-term innovation.
           </motion.p>
 
-          {/* 🔥 GLASS STATS CARD */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="
-              backdrop-blur-xl bg-white/5 border border-white/10
-              rounded-2xl px-6 py-4 inline-flex gap-6 md:gap-10
-              text-xs sm:text-sm text-gray-300 shadow-2xl
-            "
-          >
-            <div>
-              <p className="text-white font-semibold text-lg">20+</p>
-              <p>Projects</p>
-            </div>
-            <div>
-              <p className="text-white font-semibold text-lg">10+</p>
-              <p>Clients</p>
-            </div>
-            <div>
-              <p className="text-white font-semibold text-lg">5+</p>
-              <p>Years</p>
-            </div>
-          </motion.div>
+          {/* 🔥 CARDS */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            {[
+              {
+                title: "AI-Driven Innovation",
+                desc: "Create adaptive systems powered by modern AI technologies."
+              },
+              {
+                title: "Scalable Architecture",
+                desc: "Built to grow with your business without limits."
+              },
+              {
+                title: "Business Impact",
+                desc: "Focused on real results, not just development."
+              }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.2 }}
+                className="p-6 rounded-2xl 
+                  bg-white/[0.03] border border-white/[0.08]
+                  backdrop-blur-xl hover:-translate-y-2
+                  transition duration-300"
+              >
+                <h3 className="text-white font-semibold mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  {item.desc}
+                </p>
+              </motion.div>
+            ))}
+
+          </div>
 
           {/* CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="mt-8"
+            transition={{ delay: 0.6 }}
+            className="mt-12"
           >
             <button
-              onClick={() => {
+              onClick={() =>
                 document
                   .getElementById("case-studies")
                   ?.scrollIntoView({ behavior: "smooth" })
-              }}
-              className="
-                px-6 py-3 rounded-full
+              }
+              className="px-8 py-3 rounded-full
                 bg-gradient-to-r from-blue-500 to-purple-500
-                hover:scale-105 transition
-                shadow-xl text-sm sm:text-base
-              "
+                hover:scale-105 transition shadow-xl"
             >
               Explore Our Work →
             </button>
           </motion.div>
+
         </motion.div>
 
-        {/* 🔥 DEPTH OVERLAY (BIAR ADA LAYER) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#020617]" />
+        {/* 🔥 GRID FADE (INI KUNCI BIAR GA PATAH KE BAWAH) */}
+        <motion.div
+          style={{ opacity: gridOpacity }}
+          className="absolute bottom-0 left-0 w-full h-40 
+          bg-gradient-to-t from-[#020617] to-transparent"
+        />
 
         {/* 🔥 BOTTOM TRANSITION */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-[#020617]" />
-      </section>
+        <div className="absolute bottom-0 left-0 w-full h-40 
+          bg-gradient-to-b from-transparent to-[#020617]" />
 
-      {/* SPACING BIAR SMOOTH */}
-      <div className="h-20 md:h-28" />
+      </motion.section>
+
+      {/* SPACING */}
+      <div className="h-24 md:h-32" />
     </>
   )
 }
