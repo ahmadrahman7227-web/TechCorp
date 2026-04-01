@@ -59,7 +59,7 @@ export default function ClientsSection() {
                 tracking-wide sm:tracking-widest uppercase
                 bg-gradient-to-r from-blue-400 to-purple-400 
                 bg-clip-text text-transparent
-                opacity-60 hover:opacity-100
+                opacity-80 hover:opacity-100
                 hover:scale-110
                 transition duration-300 whitespace-nowrap
               "

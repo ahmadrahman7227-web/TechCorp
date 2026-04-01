@@ -1,121 +1,68 @@
-import { useMemo } from "react"
-import { motion } from "framer-motion"
+// import { Canvas, useFrame } from "@react-three/fiber";
+// import { Points, PointMaterial } from "@react-three/drei";
+// import { useRef, useMemo } from "react";
+// import * as THREE from "three";
 
-export default function NeuralNetwork({ mouse }) {
+// function FlowFieldParticles() {
+//   const ref = useRef();
 
-  const nodes = useMemo(() => {
-    return Array.from({ length: 20 }).map(() => ({
-      x: 10 + Math.random() * 80,
-      y: 20 + Math.random() * 60,
-    }))
-  }, [])
+//   const count = 3000;
 
-  const lines = []
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      const dx = nodes[i].x - nodes[j].x
-      const dy = nodes[i].y - nodes[j].y
-      const dist = Math.sqrt(dx * dx + dy * dy)
+//   const positions = useMemo(() => {
+//     const arr = new Float32Array(count * 3);
+//     for (let i = 0; i < count; i++) {
+//       arr[i * 3] = (Math.random() - 0.5) * 20;
+//       arr[i * 3 + 1] = (Math.random() - 0.5) * 20;
+//       arr[i * 3 + 2] = (Math.random() - 0.5) * 20;
+//     }
+//     return arr;
+//   }, []);
 
-      if (dist < 22) {
-        lines.push({ a: nodes[i], b: nodes[j] })
-      }
-    }
-  }
+//   useFrame((state) => {
+//     const time = state.clock.getElapsedTime();
+//     const positions = ref.current.geometry.attributes.position.array;
 
-  return (
-    <div className="absolute inset-0 z-[4] pointer-events-none">
+//     for (let i = 0; i < count; i++) {
+//       let x = positions[i * 3];
+//       let y = positions[i * 3 + 1];
 
-      <svg className="absolute w-full h-full">
+//       positions[i * 3] += Math.sin(y + time * 0.3) * 0.002;
+//       positions[i * 3 + 1] += Math.cos(x + time * 0.3) * 0.002;
+//     }
 
-        {/* ✨ GLOW */}
-        <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
+//     ref.current.geometry.attributes.position.needsUpdate = true;
+//   });
 
-          {/* ⚡ GRADIENT FLOW */}
-          <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#60a5fa" stopOpacity="0" />
-            <stop offset="50%" stopColor="#60a5fa" stopOpacity="1" />
-            <stop offset="100%" stopColor="#60a5fa" stopOpacity="0" />
-          </linearGradient>
-        </defs>
+//   return (
+//     <Points ref={ref} positions={positions} stride={3}>
+//       <PointMaterial
+//         transparent
+//         color="#7c3aed"
+//         size={0.05}
+//         sizeAttenuation
+//         depthWrite={false}
+//         blending={THREE.AdditiveBlending}
+//       />
+//     </Points>
+//   );
+// }
 
-        {/* 🔗 STATIC LINES */}
-        {lines.map((line, i) => (
-          <motion.line
-            key={"line-" + i}
-            x1={`${line.a.x}%`}
-            y1={`${line.a.y}%`}
-            x2={`${line.b.x}%`}
-            y2={`${line.b.y}%`}
-            stroke="rgba(96,165,250,0.25)"
-            strokeWidth="1.2"
-            filter="url(#glow)"
-            animate={{
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              delay: i * 0.02,
-            }}
-          />
-        ))}
+// export default function NeuralBackground() {
+//   return (
+//     <div className="fixed top-0 left-0 w-full h-full -z-10">
+//       {/* Gradient Base */}
+//       <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-black opacity-80" />
 
-        {/* ⚡ DATA FLOW */}
-        {lines.map((line, i) => (
-          <motion.line
-            key={"flow-" + i}
-            x1={`${line.a.x}%`}
-            y1={`${line.a.y}%`}
-            x2={`${line.b.x}%`}
-            y2={`${line.b.y}%`}
-            stroke="url(#flowGradient)"
-            strokeWidth="2"
-            strokeDasharray="6 12"
-            filter="url(#glow)"
-            initial={{ strokeDashoffset: 20 }}
-            animate={{ strokeDashoffset: -20 }}
-            transition={{
-              duration: 2 + Math.random(),
-              repeat: Infinity,
-              ease: "linear",
-              delay: i * 0.05,
-            }}
-          />
-        ))}
+//       {/* Glow Layer */}
+//       <div className="absolute inset-0 blur-3xl opacity-40 bg-[radial-gradient(circle_at_center,#6366f1,transparent)]" />
 
-      </svg>
+//       {/* Three.js Canvas */}
+//       <Canvas camera={{ position: [0, 0, 10], fov: 75 }}>
+//         <FlowFieldParticles />
+//       </Canvas>
 
-      {/*  NODES */}
-      {nodes.map((node, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-blue-400 rounded-full"
-          style={{
-            top: `${node.y}%`,
-            left: `${node.x}%`,
-          }}
-          animate={{
-            x: mouse.x * 0.015,
-            y: mouse.y * 0.015,
-            scale: [1, 1.8, 1],
-            opacity: [0.6, 1, 0.6]
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            delay: i * 0.05
-          }}
-        />
-      ))}
-
-    </div>
-  )
-}
+//       {/* Overlay for content focus */}
+//       <div className="absolute inset-0 bg-black/40" />
+//     </div>
+//   );
+// }

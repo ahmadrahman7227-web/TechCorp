@@ -12,8 +12,8 @@ import { Toaster } from "react-hot-toast"
 import { AuthContext } from "./context/AuthContext"
 
 // Components
-import ParticlesBg from "./components/ParticlesBg"
-import CustomCursor from "./components/CursorGlow"
+
+// import CustomCursor from "./components/CursorGlow"
 import ParallaxSection from "./components/ParallaxSection"
 import Reveal from "./components/Reveal"
 import Hero3D from "./components/Hero3D"
@@ -32,6 +32,13 @@ import CompanyParallax from "./components/CompanyParallax"
 import CaseStudies from "./components/CaseStudies"
 import WhyChooseUs from "./components/WhyChooseUs"
 import CompanyStory from "./components/CompanyStory"
+// import NeuralNetwork from "./components/NeuralNetwork"
+import GlobalBackground from "./components/GlobalBackground"
+
+// import CinematicWrapper from "./components/CinematicWrapper"
+// import ShaderBackground from "./components/ShaderBackground"
+// import GlobalOverlay from "./components/GlobalOverlay"
+
 
 
 
@@ -126,6 +133,13 @@ useEffect(() => {
 
     <Toaster position="top-right" />
 
+    {/* GLOBAL BACKGROUND DI LUAR */}
+    <GlobalBackground  />
+   
+  
+    {/* <CinematicWrapper> */}
+
+
     <Routes>
 
       
@@ -140,44 +154,22 @@ useEffect(() => {
             {loading && <LoadingScreen />}
             
             {/* {!isMobile && <ParticlesBg />} */}
-            <ParticlesBg />
+            {/* <ParticlesBg /> */}
             {/* <CustomCursor /> */}
 
             {/* BACKGROUND */}
-            {/* <div className="fixed inset-0 -z-20 pointer-events-none">
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-black via-blue-950 to-black animate-gradient"></div>
-
-              <div className="absolute w-[500px] h-[500px] pointer-events-none bg-blue-500/20 blur-3xl rounded-full top-[-100px] left-[-100px] animate-aurora"></div>
-
-              <div className="absolute w-[400px] h-[400px] pointer-events-none bg-purple-500/20 blur-3xl rounded-full bottom-[-100px] right-[-100px] animate-aurora2"></div> */}
-              
-              
-              
-              {/* {!isMobile && (
-            <>
-              <div className="absolute w-[500px] h-[500px] bg-blue-500/20 blur-3xl rounded-full top-[-100px] left-[-100px] animate-aurora"></div>
-
-              <div className="absolute w-[400px] h-[400px] bg-purple-500/20 blur-3xl rounded-full bottom-[-100px] right-[-100px] animate-aurora2"></div>
-            </>
-          )} */}
-            {/* </div> */}
+            
+          
 
 
             {/* GLOBAL BACKGROUND */}
-<div className="fixed inset-0 -z-20 pointer-events-none bg-[#020617]">
+ 
+                
+                 {/* <GalaxyScene /> */}
+                {/* <ShaderBackground /> */}
+                {/* <GlobalOverlay /> */}
+                {/* <NeuralNetwork /> */}
 
-  {/* BASE GRADIENT */}
-  <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#020617] to-black"></div>
-
-  {/* CENTER LIGHT */}
-  <div className="absolute inset-0 flex items-center justify-center">
-    <div className="w-[800px] h-[800px] bg-blue-500/10 blur-[120px] rounded-full"></div>
-  </div>
-
-  {/* NOISE TEXTURE */}
-  <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
-
-</div>
 
                 
             {/* NAVBAR */}
@@ -375,6 +367,8 @@ useEffect(() => {
             
               <ClientsSection />
 
+              <ParallaxSection />
+
               <CompanyIntro />
 
               <CompanyParallax />
@@ -390,16 +384,15 @@ useEffect(() => {
 
 {/* <div className="relative z-10 bg-black"> */}
 
-               <ParallaxSection />
-
+               
 
               {/* SERVICES */}
 <section id="services" className="py-24 px-6 md:px-12 relative">
 
-  <div className="absolute inset-0 pointer-events-none">
+  {/* <div className="absolute inset-0 pointer-events-none">
     <div className="w-[400px] h-[400px] bg-blue-500/10 blur-3xl rounded-full absolute top-0 left-0"></div>
     <div className="w-[300px] h-[300px] bg-purple-500/10 blur-3xl rounded-full absolute bottom-0 right-0"></div>
-  </div>
+  </div> */}
 
   <Reveal>
     <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 bg-clip-text text-transparent">
@@ -619,6 +612,8 @@ useEffect(() => {
       
 
     </Routes>
-    </>
+    {/* </CinematicWrapper> */}
+     </>
+     
   )
 }
