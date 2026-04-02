@@ -10,21 +10,21 @@ export default function CompanyParallax() {
     offset: ["start end", "end start"],
   })
 
-  // 🔥 PARALLAX DEPTH (lebih halus & natural)
+  //  PARALLAX DEPTH 
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "20%"])
   const scaleBg = useTransform(scrollYProgress, [0, 1], [1.02, 1.12])
   const opacityOverlay = useTransform(scrollYProgress, [0, 1], [0.45, 0.75])
 
-  // 🔥 SMOOTH FADE GLOBAL (ini kunci)
+  //  SMOOTH FADE GLOBAL 
   const opacitySection = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0])
 
-  // 🔥 CONTENT FLOAT (biar cinematic)
+  //  CONTENT FLOAT 
   const yContent = useTransform(scrollYProgress, [0, 1], [80, -60])
 
-  // 🔥 GRID FADE IN (biar ga muncul kasar)
+  //  GRID FADE IN 
   const gridOpacity = useTransform(scrollYProgress, [0.4, 1], [0, 1])
 
-  // 🔥 MOUSE GLOW
+  //  MOUSE GLOW
   const [mouse, setMouse] = useState({ x: 0, y: 0 })
   const [isMobile, setIsMobile] = useState(false)
 
@@ -50,11 +50,11 @@ export default function CompanyParallax() {
         className="relative h-[75vh] md:h-[95vh] overflow-hidden flex items-center justify-center"
       >
 
-        {/* 🔥 TOP BLEND (SUPER HALUS) */}
+        {/*  TOP BLEND  */}
         <div className="absolute top-0 left-0 w-full h-60 
           bg-gradient-to-b from-[#020617] via-[#020617]/70 to-transparent z-20" />
 
-        {/* 🔥 BACKGROUND */}
+        {/*  BACKGROUND */}
         <motion.div
           style={{ y: yBg, scale: scaleBg }}
           className="absolute inset-0"
@@ -66,25 +66,25 @@ export default function CompanyParallax() {
           />
         </motion.div>
 
-        {/* 🔥 DARK OVERLAY */}
+        {/*  DARK OVERLAY */}
         <motion.div
           style={{ opacity: opacityOverlay }}
           className="absolute inset-0 bg-black"
         />
 
-        {/* 🔥 GLOBAL COLOR BLEND */}
+        {/*  GLOBAL COLOR BLEND */}
         <div className="absolute inset-0 
           bg-gradient-to-b from-[#020617] via-transparent to-[#020617]" />
 
-        {/* 🔥 CONNECTOR LIGHT (ini bikin nyatu antar section) */}
+        {/*  CONNECTOR LIGHT (ini bikin nyatu antar section) */}
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 
           w-[700px] h-[350px] bg-blue-500/10 blur-[160px] rounded-full" />
 
-        {/* 🔥 EXTRA DEPTH */}
+        {/*  EXTRA DEPTH */}
         <div className="absolute bottom-[-25%] right-[15%] 
           w-[600px] h-[600px] bg-purple-500/10 blur-[180px] rounded-full" />
 
-        {/* 🔥 MOUSE INTERACTION */}
+        {/*  MOUSE INTERACTION */}
         {!isMobile && (
           <motion.div
             className="pointer-events-none absolute inset-0"
@@ -94,7 +94,7 @@ export default function CompanyParallax() {
           />
         )}
 
-        {/* 🔥 MAIN CONTENT */}
+        {/*  MAIN CONTENT */}
         <motion.div
           style={{ y: yContent }}
           className="relative z-30 text-center px-4 max-w-5xl"
@@ -120,7 +120,7 @@ export default function CompanyParallax() {
             that drive real business growth and long-term innovation.
           </motion.p>
 
-          {/* 🔥 CARDS */}
+          {/*  CARDS */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             {[
@@ -181,14 +181,14 @@ export default function CompanyParallax() {
 
         </motion.div>
 
-        {/* 🔥 GRID FADE (INI KUNCI BIAR GA PATAH KE BAWAH) */}
+        {/*  GRID FADE (INI KUNCI BIAR GA PATAH KE BAWAH) */}
         <motion.div
           style={{ opacity: gridOpacity }}
           className="absolute bottom-0 left-0 w-full h-40 
           bg-gradient-to-t from-[#020617] to-transparent"
         />
 
-        {/* 🔥 BOTTOM TRANSITION */}
+        {/*  BOTTOM TRANSITION */}
         <div className="absolute bottom-0 left-0 w-full h-40 
           bg-gradient-to-b from-transparent to-[#020617]" />
 

@@ -33,7 +33,7 @@ export default function CaseStudies() {
 
         {/* HEADER */}
         <div className="text-center mb-20">
-          <p className="text-blue-400 text-xs tracking-[0.35em] mb-4">
+          <p className="text-blue-400 text-3xl font-bold tracking-[0.35em] mb-4">
             CASE STUDIES
           </p>
 

@@ -53,7 +53,7 @@ export default function ServiceDetail() {
   return (
     <section className="min-h-screen bg-black text-white px-6 py-32">
 
-  {/* 🔥 TAMBAHAN CONTAINER */}
+  {/*  TAMBAHAN CONTAINER */}
   <div className="max-w-5xl mx-auto">
 
     {/* BACK */}
@@ -74,7 +74,7 @@ export default function ServiceDetail() {
       {service.desc}
     </p>
 
-    {/* 🔥 GRID BIAR GA KOSONG KANAN */}
+    {/*  GRID BIAR GA KOSONG KANAN */}
     <div className="grid md:grid-cols-2 gap-16">
 
       {/* FEATURES */}

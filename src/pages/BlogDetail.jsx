@@ -15,12 +15,12 @@ import {
 
 import { AuthContext } from "../context/AuthContext"
 
-// 🔥 ASSETS
+//  ASSETS
 import blog1 from "../assets/blog-1.jpg"
 import blog2 from "../assets/blog-2.jpg"
 import blog3 from "../assets/blog-3.jpg"
 
-// 🔥 STATIC BLOG (TIDAK DIUBAH)
+//  STATIC BLOG (TIDAK DIUBAH)
 const staticBlogs = [
   {
     id: "static-1",
@@ -95,7 +95,7 @@ export default function BlogDetail() {
   const [blog, setBlog] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  // 🔥 KOMENTAR SYSTEM
+  //  KOMENTAR SYSTEM
   const [comments, setComments] = useState([])
   const [commentText, setCommentText] = useState("")
   const [replyText, setReplyText] = useState({})
@@ -108,7 +108,7 @@ export default function BlogDetail() {
   const isOwner = user?.uid === blog?.userId
   const isAdmin = user?.email === "techcorp.alif@gmail.com"
 
-  // 🔥 REALTIME COMMENTS
+  //  REALTIME COMMENTS
   useEffect(() => {
     const q = query(
       collection(db, "comments"),
@@ -127,7 +127,7 @@ export default function BlogDetail() {
     return () => unsub()
   }, [id])
 
-  // 🔥 FETCH BLOG (ASLI)
+  //  FETCH BLOG (ASLI)
   useEffect(() => {
     const fetchBlog = async () => {
       setLoading(true)
@@ -167,7 +167,7 @@ export default function BlogDetail() {
     fetchBlog()
   }, [id])
 
-  // ❤️ LIKE BLOG
+  //  LIKE BLOG
   const handleLike = async () => {
   if (!blog?.id) return
   if (!user) return alert("Login dulu")
@@ -177,7 +177,7 @@ export default function BlogDetail() {
   const alreadyLiked = blog.likedBy?.includes(user.uid)
 
   if (alreadyLiked) {
-    // 💔 UNLIKE
+    //  UNLIKE
     await updateDoc(ref, {
       likes: increment(-1),
       likedBy: blog.likedBy.filter(id => id !== user.uid)
@@ -189,7 +189,7 @@ export default function BlogDetail() {
       likedBy: prev.likedBy.filter(id => id !== user.uid)
     }))
   } else {
-    // ❤️ LIKE
+    //  LIKE
     await updateDoc(ref, {
       likes: increment(1),
       likedBy: [...(blog.likedBy || []), user.uid]
@@ -203,7 +203,7 @@ export default function BlogDetail() {
   }
 }
 
-  // ⭐ BOOKMARK
+  //  BOOKMARK
   // const handleBookmark = () => {
   //   const saved = JSON.parse(localStorage.getItem("bookmark")) || []
   //   localStorage.setItem("bookmark", JSON.stringify([...saved, blog]))
@@ -225,13 +225,13 @@ export default function BlogDetail() {
   alert("Disimpan!")
 }
 
-  // 🔗 SHARE
+  //  SHARE
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href)
     alert("Link disalin!")
   }
 
-  // 💬 ADD COMMENT
+  //  ADD COMMENT
   const handleAddComment = async () => {
 
     if (!user) {
@@ -255,7 +255,7 @@ export default function BlogDetail() {
     setCommentText("")
   }
 
-  // 💬 REPLY
+  //  REPLY
   const handleReply = async (parentId) => {
     if (!replyText[parentId]) return
 
@@ -399,13 +399,13 @@ const handleUpdate = async (id) => {
   const alreadyLiked = comment.likedBy?.includes(user.uid)
 
   if (alreadyLiked) {
-    // 💔 UNLIKE
+    //  UNLIKE
     await updateDoc(ref, {
       likes: increment(-1),
       likedBy: comment.likedBy.filter(id => id !== user.uid)
     })
   } else {
-    // ❤️ LIKE
+    //  LIKE
     await updateDoc(ref, {
       likes: increment(1),
       likedBy: [...(comment.likedBy || []), user.uid]
@@ -442,7 +442,7 @@ const handleUpdate = async (id) => {
     pinned: true
   })
 
-  // 🔥 UPDATE UI LANGSUNG
+  //  UPDATE UI LANGSUNG
   setComments(prev =>
     prev.map(c =>
       c.id === comment.id

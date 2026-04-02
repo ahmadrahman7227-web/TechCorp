@@ -337,7 +337,7 @@ useEffect(() => {
     </div>
   )}
 
-  {/* 💬 CHAT */}
+  {/*  CHAT */}
   {phase === "chat" && (
     <>
       {/* {messages.map((msg, i) => (

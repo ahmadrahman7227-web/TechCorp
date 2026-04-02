@@ -193,15 +193,15 @@ export default function EditBlog() {
   imageUrl = uploadedUrl
 }
 
-    // 🔥 UPDATE FIRESTORE
+    //  UPDATE FIRESTORE
     const docRef = doc(db, "blogs", id)
 
     await updateDoc(docRef, {
       ...form,
-      img: imageUrl, // 🔥 INI YANG PENTING
+      img: imageUrl, 
     })
 
-    // 🔥 UPDATE LOCAL (FITUR LAMA)
+    //  UPDATE LOCAL 
     const stored = JSON.parse(localStorage.getItem("blogs")) || []
 
     const updated = stored.map((b) =>
@@ -253,7 +253,7 @@ export default function EditBlog() {
             className="w-full p-3 border rounded"
           />
 
-          {/* ✅ PREVIEW (lama / baru otomatis) */}
+          {/*  PREVIEW  */}
           {preview && (
             <img
               src={preview}
@@ -262,7 +262,7 @@ export default function EditBlog() {
             />
           )}
 
-          {/* ✅ INPUT FILE (FIX: hanya 1 & pakai handler) */}
+          {/*  INPUT FILE (FIX: hanya 1 & pakai handler) */}
           <input
             type="file"
             accept="image/*"

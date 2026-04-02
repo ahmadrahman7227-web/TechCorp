@@ -68,7 +68,7 @@ export default function Navbar() {
                 {item}
               </a>
 
-              {/* 🔥 ACTIVE BACKGROUND */}
+              {/*  ACTIVE BACKGROUND */}
               {active === item && (
                 <motion.div
                   layoutId="nav-pill"
@@ -77,7 +77,7 @@ export default function Navbar() {
                 />
               )}
 
-              {/* ✨ HOVER GLOW */}
+              {/*  HOVER GLOW */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-blue-500/20 blur-xl rounded-xl transition duration-300"></div>
 
               {/* ⚡ CLICK RIPPLE */}

@@ -16,7 +16,7 @@ const Register = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password)
-      navigate("/") // 🔥 langsung ke home
+      navigate("/") //  langsung ke home
     } catch (err) {
       setError("Gagal daftar! Email sudah digunakan atau tidak valid")
     }
@@ -26,7 +26,7 @@ const Register = () => {
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
       <div className="bg-white/10 backdrop-blur-lg p-8 rounded-xl w-[350px] shadow-lg">
 
-        {/* 🔙 BACK KE HOME */}
+        {/*  BACK KE HOME */}
         <button
           onClick={() => navigate("/")}
           className="mb-4 text-blue-400 hover:underline"
@@ -72,7 +72,7 @@ const Register = () => {
           </button>
         </form>
 
-        {/* 🔗 KE LOGIN */}
+        {/*  KE LOGIN */}
         <p className="text-sm text-white mt-4 text-center">
           Sudah punya akun?{" "}
           <span

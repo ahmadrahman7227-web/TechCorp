@@ -35,7 +35,7 @@ export default function Services() {
   return (
     <section className="min-h-screen bg-black text-white px-6 py-32">
 
-      {/* 🔥 BACK BUTTON */}
+      {/*  BACK BUTTON */}
       <button
         onClick={() => navigate("/")}
         className="mb-10 text-blue-400 hover:underline"

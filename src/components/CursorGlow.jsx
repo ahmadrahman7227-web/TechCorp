@@ -8,7 +8,7 @@ export default function CustomCursor() {
   const mouse = useRef({ x: 0, y: 0 })
   const pos = useRef({ x: 0, y: 0 })
 
-  // 🎯 TRACK MOUSE (NO RE-RENDER)
+  //  TRACK MOUSE (NO RE-RENDER)
   useEffect(() => {
     const move = (e) => {
       mouse.current.x = e.clientX
@@ -19,7 +19,7 @@ export default function CustomCursor() {
     return () => window.removeEventListener("mousemove", move)
   }, [])
 
-  // 🔥 PERFORMANCE ANIMATION (FPS CONTROLLED)
+  //  PERFORMANCE ANIMATION (FPS CONTROLLED)
   usePerformanceAnimation(() => {
     // smooth follow
     pos.current.x += (mouse.current.x - pos.current.x) * 0.18
@@ -35,11 +35,11 @@ export default function CustomCursor() {
       glowRef.current.style.transform =
         `translate3d(${x}px, ${y}px, 0)`
     }
-  }, 60) // 👉 ubah ke 30 kalau mau lebih ringan
+  }, 60) // 👉 ubah ke 30 kalau ingin lebih ringan
 
   return (
     <>
-      {/* 💖 GLOW */}
+      {/*  GLOW */}
       <div
         ref={glowRef}
         className="fixed top-0 left-0 pointer-events-none z-[999]"
@@ -55,7 +55,7 @@ export default function CustomCursor() {
         }}
       />
 
-      {/* 🎯 DOT */}
+      {/*  DOT */}
       <div
         ref={cursorRef}
         className="fixed top-0 left-0 pointer-events-none z-[9999]"

@@ -14,7 +14,7 @@ import { AuthContext } from "./context/AuthContext"
 // Components
 
 // import CustomCursor from "./components/CursorGlow"
-import ParallaxSection from "./components/ParallaxSection"
+// import ParallaxSection from "./components/ParallaxSection"
 import Reveal from "./components/Reveal"
 import Hero3D from "./components/Hero3D"
 import HeroText from "./components/HeroText"
@@ -34,6 +34,7 @@ import WhyChooseUs from "./components/WhyChooseUs"
 import CompanyStory from "./components/CompanyStory"
 // import NeuralNetwork from "./components/NeuralNetwork"
 import GlobalBackground from "./components/GlobalBackground"
+import Testimonial from "./components/Testimonial"
 
 // import CinematicWrapper from "./components/CinematicWrapper"
 // import ShaderBackground from "./components/ShaderBackground"
@@ -84,7 +85,7 @@ export default function App() {
 //   return () => window.removeEventListener("resize", checkScreen)
 // }, [])
 
-  // LOADING (PUNYA KAMU, TETAP)
+  // LOADING 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2500)
     return () => clearTimeout(timer)
@@ -100,7 +101,7 @@ export default function App() {
   const handleScroll = () => {
     setScrolled(window.scrollY > 50)
 
-    // 🔥 AUTO CLOSE MOBILE MENU
+    //  AUTO CLOSE MOBILE MENU
     if (isOpen) setIsOpen(false)
   }
 
@@ -184,22 +185,87 @@ useEffect(() => {
             >
               <div className="flex justify-between items-center max-w-7xl mx-auto">
 
+
+                {/* LOGO + BRAND */}
+              {/* LOGO + BRAND */}
+<motion.div
+  whileHover={{ scale: 1.05 }}
+  onClick={() => navigate("/")}
+  className="flex items-center gap-3 cursor-pointer select-none"
+>
+
+  {/*  LOGO AI ORB */}
+  <div className="relative w-7 h-7">
+
+    {/* OUTER GLOW */}
+    <div className="absolute inset-0 rounded-full bg-blue-400/30 blur-md" />
+
+    {/* CORE */}
+    <div className="absolute inset-[5px] rounded-full bg-gradient-to-br from-blue-400 to-purple-500" />
+
+    {/* ROTATING RING */}
+    <motion.div
+      className="absolute inset-0 rounded-full border border-blue-400/40"
+      animate={{ rotate: 360 }}
+      transition={{
+        duration: 6,
+        repeat: Infinity,
+        ease: "linear",
+      }}
+    />
+
+    {/* ORBIT DOT */}
+    <motion.div
+      className="absolute w-1.5 h-1.5 bg-cyan-400 rounded-full"
+      animate={{ rotate: 360 }}
+      transition={{
+        duration: 3,
+        repeat: Infinity,
+        ease: "linear",
+      }}
+      style={{
+        top: "0px",
+        left: "50%",
+        transformOrigin: "0 14px",
+      }}
+    />
+  </div>
+
+  {/*  TEXT */}
+  <h1 className="text-xl font-bold tracking-wide 
+    bg-gradient-to-r from-blue-400 to-purple-400 
+    bg-clip-text text-transparent">
+    TechCorp
+  </h1>
+
+</motion.div>
+
+{/* HAMBURGER */}
+<div
+  className="md:hidden text-white text-2xl cursor-pointer"
+  onClick={() => setIsOpen(!isOpen)}
+>
+  {isOpen ? "✕" : "☰"}
+</div>
+
+
+
                 {/* LOGO */}
-                <motion.h1
+                {/* <motion.h1
                   whileHover={{ scale: 1.1 }}
                   className="text-blue-400 font-bold text-xl cursor-pointer"
                   onClick={() => navigate("/")}
                 >
                   TechCorp
-                </motion.h1>
+                </motion.h1> */}
 
                 {/* HAMBURGER */}
-              <div
+              {/* <div
                 className="md:hidden text-white text-2xl cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 {isOpen ? "✕" : "☰"}
-              </div>
+              </div> */}
 
                 {/* MENU */}
                 <div className="hidden md:flex items-center space-x-8">
@@ -501,80 +567,7 @@ useEffect(() => {
 
         
             {/* TESTIMONIAL SLIDER */}
-<section className="py-24 px-6 relative overflow-hidden">
-
-  <h2 className="text-4xl font-bold text-center mb-16 
-    bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 
-    bg-clip-text text-transparent">
-    What Our Clients Say
-  </h2>
-
-  <div className="max-w-4xl mx-auto text-center relative min-h-[300px] px-4 flex items-center justify-center">
-    {[
-      {
-        name: "John Carter",
-        role: "Startup Founder",
-        text: "TechCorp transformed our business with a powerful and scalable platform.",
-        img: "https://randomuser.me/api/portraits/men/32.jpg"
-      },
-      {
-        name: "Lisa Wong",
-        role: "Product Manager",
-        text: "The UI/UX quality is top-notch. Everything feels smooth and modern.",
-        img: "https://randomuser.me/api/portraits/women/44.jpg"
-      },
-      {
-        name: "Michael Lee",
-        role: "CTO",
-        text: "Their cloud solutions helped us scale without worrying about infrastructure.",
-        img: "https://randomuser.me/api/portraits/men/76.jpg"
-      }
-    ].map((t, i) => (
-      <motion.div
-        key={i}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{
-          opacity: currentTestimonial === i ? 1 : 0,
-          scale: currentTestimonial === i ? 1 : 0.9,
-        }}
-        transition={{ duration: 0.5 }}
-        className={`absolute inset-0 flex flex-col items-center justify-center ${
-          currentTestimonial === i ? "z-10" : "z-0"
-        }`}
-      >
-
-        {/* AVATAR */}
-        <img 
-          src={t.img} 
-          loading="lazy"
-          className="w-20 h-20 rounded-full mb-4 border-2 border-blue-400" 
-        />
-        {/* <img
-          src={t.img}
-          className="w-20 h-20 rounded-full mb-4 border-2 border-blue-400"
-        /> */}
-
-        {/* TEXT */}
-        <p className="text-gray-300 mb-4 text-lg max-w-xl">
-          “{t.text}”
-        </p>
-
-        {/* ⭐ RATING */}
-        <div className="flex gap-1 mb-2">
-          {"★★★★★".split("").map((star, idx) => (
-            <span key={idx} className="text-yellow-400">{star}</span>
-          ))}
-        </div>
-
-        {/* NAME */}
-        <h4 className="font-semibold">{t.name}</h4>
-        <p className="text-sm text-blue-400">{t.role}</p>
-
-      </motion.div>
-    ))}
-
-  </div>
-</section>
+            <Testimonial />
           
             <TeamSection />
 
@@ -583,7 +576,7 @@ useEffect(() => {
             <ContactSection />
 
             <Footer />
-            {/* </div> */}
+            
 
           </div>
         }

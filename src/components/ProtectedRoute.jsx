@@ -6,7 +6,7 @@ import LoadingScreen from "./LoadingScreen"
 export default function ProtectedRoute({ children }) {
   const context = useContext(AuthContext)
 
-  // 🔥 safety check (anti undefined context)
+  //  safety check (anti undefined context)
   if (!context) {
     console.error("AuthContext tidak terbaca")
     return <Navigate to="/login" replace />
@@ -17,16 +17,16 @@ export default function ProtectedRoute({ children }) {
   console.log("PROTECTED USER:", user)
   console.log("PROTECTED LOADING:", loading)
 
-  // 🔥 tunggu firebase
+  // tunggu firebase
   if (loading) {
     return <LoadingScreen />
   }
 
-  // 🔥 kalau belum login
+  //  kalau belum login
   if (!user) {
     return <Navigate to="/login" replace />
   }
 
-  // ✅ kalau sudah login
+  //  kalau sudah login
   return children
 }

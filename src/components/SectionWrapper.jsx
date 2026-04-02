@@ -1,6 +1,6 @@
-export default function SectionWrapper({ children, className = "" }) {
+export default function SectionWrapper({ id, children, className }) {
   return (
-    <section className={`py-20 md:py-28 px-4 sm:px-6 md:px-16 ${className}`}>
+    <section id={id} className={className}>
       <div className="max-w-7xl mx-auto">
         {children}
       </div>

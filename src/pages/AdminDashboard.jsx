@@ -15,11 +15,11 @@ export default function AdminDashboard() {
   const [filter, setFilter] = useState("draft")
   const [loading, setLoading] = useState(true)
 
-  // 🔐 ADMIN CHECK
+  //  ADMIN CHECK
   const adminEmails = ["alif123@gmail.com"]
   const isAdmin = adminEmails.includes(user?.email)
 
-  // 📡 FETCH BLOG REALTIME + FIX STATUS
+  //  FETCH BLOG REALTIME + FIX STATUS
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "blogs"), (snap) => {
       const data = snap.docs.map(doc => ({
@@ -35,7 +35,7 @@ export default function AdminDashboard() {
     return () => unsub()
   }, [])
 
-  // ✅ PUBLISH
+  //  PUBLISH
   const handlePublish = async (blog) => {
     if (!confirm("Publish blog ini?")) return
 
@@ -49,7 +49,7 @@ export default function AdminDashboard() {
     }
   }
 
-  // 🔄 UNPUBLISH
+  //  UNPUBLISH
   const handleUnpublish = async (blog) => {
     try {
       await updateDoc(doc(db, "blogs", blog.id), {
@@ -61,7 +61,7 @@ export default function AdminDashboard() {
     }
   }
 
-  // 🗑 DELETE
+  //  DELETE
   const handleDelete = async (blog) => {
     const confirmDelete = confirm("Hapus blog ini?")
     if (!confirmDelete) return
@@ -74,19 +74,19 @@ export default function AdminDashboard() {
     }
   }
 
-  // 🔍 FILTER (SUDAH FIX)
+  //  FILTER (SUDAH FIX)
   const filteredBlogs = blogs.filter((b) => {
     if (filter === "draft") return b.status === "draft"
     if (filter === "published") return b.status === "published"
     return true
   })
 
-  // 📊 STATS (SUDAH AKURAT)
+  // STATS (SUDAH AKURAT)
   const totalBlogs = blogs.length
   const totalDraft = blogs.filter(b => b.status === "draft").length
   const totalPublished = blogs.filter(b => b.status === "published").length
 
-  // 🔒 PROTECT
+  //  PROTECT
   if (!isAdmin) {
     return (
       <div className="h-screen flex items-center justify-center bg-black text-white">

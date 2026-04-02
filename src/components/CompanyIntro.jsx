@@ -4,16 +4,19 @@ import office from "../assets/office.jpg"
 
 export default function CompanyIntro() {
   return (
-    <SectionWrapper className="relative overflow-hidden">
+    <SectionWrapper 
+      id="about"
+      className="relative overflow-hidden z-10 scroll-mt-24"
+    >
 
-      {/* BACKGROUND LIGHT FX */}
-      <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-blue-500/10 blur-[140px]" />
-      <div className="absolute top-1/2 right-[-200px] w-[500px] h-[500px] bg-purple-500/10 blur-[140px]" />
-      <div className="absolute bottom-[-200px] left-1/3 w-[400px] h-[400px] bg-indigo-500/10 blur-[120px]" />
+      {/*  BACKGROUND LIGHT FX (FIX: pointer-events-none) */}
+      <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-blue-500/10 blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 right-[-200px] w-[500px] h-[500px] bg-purple-500/10 blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-[-200px] left-1/3 w-[400px] h-[400px] bg-indigo-500/10 blur-[120px] pointer-events-none" />
 
       <div className="grid md:grid-cols-2 gap-14 md:gap-20 items-center relative z-10">
 
-        {/* IMAGE SIDE */}
+        {/* ================= IMAGE ================= */}
         <motion.div
           initial={{ opacity: 0, x: -80, scale: 0.95 }}
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
@@ -30,18 +33,18 @@ export default function CompanyIntro() {
             />
 
             {/* DARK OVERLAY */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none" />
 
-            {/* LIGHT EDGE */}
-            <div className="absolute inset-0 border border-white/10 rounded-3xl" />
+            {/* BORDER */}
+            <div className="absolute inset-0 border border-white/10 rounded-3xl pointer-events-none" />
 
           </div>
 
-          {/* OUTER GLOW */}
-          <div className="absolute inset-0 rounded-3xl bg-blue-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition duration-700" />
+          {/* GLOW */}
+          <div className="absolute inset-0 rounded-3xl bg-blue-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition duration-700 pointer-events-none" />
         </motion.div>
 
-        {/* TEXT SIDE */}
+        {/* ================= TEXT ================= */}
         <motion.div
           initial={{ opacity: 0, x: 80 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -54,8 +57,10 @@ export default function CompanyIntro() {
             WHO WE ARE
           </p>
 
-          {/* HEADLINE (GRADIENT TEXT) */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-300 text-transparent bg-clip-text">
+          {/* TITLE */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight 
+            bg-gradient-to-r from-white via-blue-200 to-purple-300 
+            text-transparent bg-clip-text">
             Engineering Scalable Systems That Power Real Business Growth
           </h2>
 
@@ -66,7 +71,7 @@ export default function CompanyIntro() {
             technological landscape.
           </p>
 
-          {/* VALUE POINTS (GLASS STYLE) */}
+          {/* VALUE POINTS */}
           <div className="space-y-3 mb-8">
             {[
               "AI-powered and future-ready architecture",
@@ -104,34 +109,34 @@ export default function CompanyIntro() {
             ))}
           </div>
 
-          {/* CTA GROUP */}
+          {/* CTA */}
           <div className="flex flex-wrap gap-4">
 
             {/* PRIMARY */}
             <button
               onClick={() => {
-                document.getElementById("contact").scrollIntoView({ behavior: "smooth" })
+                document.getElementById("contact")?.scrollIntoView({
+                  behavior: "smooth"
+                })
               }}
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-medium hover:opacity-90 transition"
+              className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 
+              text-white text-sm font-medium hover:opacity-90 transition"
             >
               Start a Project →
             </button>
-            {/* <button className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-medium hover:opacity-90 transition shadow-lg shadow-blue-500/20">
-              Start a Project →
-            </button> */}
 
             {/* SECONDARY */}
             <button
-                onClick={() => {
-                  document.getElementById("case-studies").scrollIntoView({ behavior: "smooth" })
-                }}
-                className="px-6 py-3 rounded-full border border-white/20 text-white text-sm hover:bg-white/10 transition"
-              >
-                View Portfolio
-              </button>
-            {/* <button className="px-6 py-3 rounded-full border border-white/20 text-white text-sm hover:bg-white/10 transition">
+              onClick={() => {
+                document.getElementById("case-studies")?.scrollIntoView({
+                  behavior: "smooth"
+                })
+              }}
+              className="px-6 py-3 rounded-full border border-white/20 
+              text-white text-sm hover:bg-white/10 transition"
+            >
               View Portfolio
-            </button> */}
+            </button>
 
           </div>
 

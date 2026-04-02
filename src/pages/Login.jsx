@@ -19,7 +19,7 @@ const Login = () => {
 
     const user = res.user
 
-    // 🔥 CEK ADMIN
+    //  CEK ADMIN
     if (user.email === "alif123@gmail.com") {
       navigate("/admin")
     } else {
@@ -47,7 +47,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
       <div className="bg-white/10 backdrop-blur-lg p-8 rounded-xl w-[350px] shadow-lg">
 
-        {/* 🔙 BACK KE HOME */}
+        {/*  BACK KE HOME */}
         <button
           onClick={() => navigate("/")}
           className="mb-4 text-blue-400 hover:underline"
